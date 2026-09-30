@@ -1,0 +1,14 @@
+node_modules/
+.project_id
+.github_repo
+.env
+.env.*
+.vercel/
+.tanstack/
+.grok/
+screenshots/
+artifacts/
+dist/
+*.log
+.node_modules.lock
+.DS_Store

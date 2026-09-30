@@ -1,6 +1,6 @@
-# Pooly's Mood
+# Sito-Mood
+Sito Premium Pooly's Mood - Espositori Lusso per Vino
 
-Sito premium di **Pooly's Mood** — espositori, arredi e allestimenti su misura per il vino.
 
 Questo repository contiene il codice del nuovo sito, pensato per cantine, enoteche e hospitality di lusso.
 

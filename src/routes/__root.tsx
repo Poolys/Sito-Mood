@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { PoolyAI } from "@/components/pooly-ai";
 import { useMood } from "@/lib/store";
 import appCss from "../styles.css?url";
 
@@ -26,6 +27,7 @@ function RootShell() {
       <AuthProvider>
         <Outlet />
       </AuthProvider>
+      <PoolyAI />
       <Toaster
         theme="dark"
         position="bottom-right"

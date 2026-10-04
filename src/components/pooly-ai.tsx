@@ -109,14 +109,19 @@ export function PoolyAI() {
   return (
     <>
       <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-5 right-5 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
-        aria-label="Apri PoolyAI"
-        aria-pressed={open}
-      >
-        PoolyAI
-      </button>
+type="button"
+onClick={() => {
+  console.log("CLICK POOLY");
+  setOpen((v) => !v);
+}}
+
+className="fixed bottom-5 right-5 z-[9999] flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg text-sm font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer pointer-events-auto"
+aria-label="Apri PoolyAI"
+aria-pressed={open}
+
+PoolyAI
+button/>
+      
 
       {open && (
         <div className="fixed bottom-24 right-5 z-50 h-[520px] w-[min(92vw,380px)] overflow-hidden rounded-2xl border border-accent bg-surface shadow-2xl flex flex-col">

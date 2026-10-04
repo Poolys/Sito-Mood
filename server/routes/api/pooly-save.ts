@@ -1,4 +1,4 @@
-import { sendEmail } from "../../utils/send-email";
+import { sendEmail } from "../../src/lib/send-email";
 
 type MessageInput = {
   role?: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 interface PoolyAIChatButtonProps {
   onClick: () => void;
@@ -11,15 +11,13 @@ export default function PoolyAIChatButton({
   onClick,
   isOpen = false,
 }: PoolyAIChatButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <style>
-      {`
+    <>
+      <style>{`
         @keyframes poolyPulse {
           0%, 100% {
             transform: scale(1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
                         inset 0 1px 0 rgba(212, 175, 55, 0.2),
                         0 0 20px rgba(212, 175, 55, 0);
           }
@@ -39,8 +37,7 @@ export default function PoolyAIChatButton({
           width: 72px;
           height: 72px;
           border-radius: 50%;
-          border: 1.5px solid;
-          border-image: linear-gradient(135deg, #d4af37 0%, #a89968 100%) 1;
+          border: 1.5px solid #d4af37;
           background: radial-gradient(circle at 30% 30%, #2a2a2a, #1f1f1f);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
                       inset 0 1px 0 rgba(212, 175, 55, 0.2);
@@ -63,13 +60,11 @@ export default function PoolyAIChatButton({
                       inset 0 1px 0 rgba(230, 197, 71, 0.3),
                       0 0 25px rgba(212, 175, 55, 0.2);
           background: radial-gradient(circle at 30% 30%, #333333, #242424);
-          border-image: linear-gradient(135deg, #e6c547 0%, #d4af37 100%) 1;
+          border-color: #e6c547;
         }
 
         .pooly-button:active {
           transform: scale(0.96);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5),
-                      inset 0 1px 0 rgba(212, 175, 55, 0.15);
         }
 
         .pooly-button.pulse {
@@ -80,19 +75,17 @@ export default function PoolyAIChatButton({
           outline: 2px solid #d4af37;
           outline-offset: 2px;
         }
-      `}
-    </style>
+      `}</style>
 
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      aria-label="Apri chat PoolyAI"
-      aria-pressed={isOpen}
-      className={`pooly-button ${isOpen ? "pulse" : ""}`}
-      type="button"
-    >
-      PoolyAI
-    </button>
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label="Apri chat PoolyAI"
+        aria-pressed={isOpen}
+        className={`pooly-button ${isOpen ? "pulse" : ""}`}
+      >
+        PoolyAI
+      </button>
+    </>
   );
 }

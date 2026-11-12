@@ -1,4 +1,4 @@
-import { Send, X } from "lucide-react";
+import { MessageCircle, Send, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { conciergeCopy, replyToVisitor, type Lang } from "@/lib/concierge";
 import { useMood } from "@/lib/store";
@@ -36,6 +36,8 @@ type StoredMessage = {
   at: string;
 };
 
+type KeyboardLayout = { bottom: number; panelHeight: number };
+
 function readStored(): StoredMessage[] {
   try {
     const raw = window.localStorage.getItem(KEY);
@@ -71,6 +73,7 @@ export function Concierge() {
   const t = conciergeCopy[lang] ?? conciergeCopy.it;
   const [open, setOpen] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
+  const [keyboardLayout, setKeyboardLayout] = useState<KeyboardLayout | null>(null);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<StoredMessage[]>([]);
   const [ready, setReady] = useState(false);
@@ -94,6 +97,60 @@ export function Concierge() {
     return () => {
       window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const updateKeyboardLayout = () => {
+      const active = document.activeElement;
+      const editing =
+        active instanceof HTMLElement &&
+        (active.isContentEditable || ["INPUT", "TEXTAREA"].includes(active.tagName));
+      const touchLayout = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+      const obscuredHeight = Math.max(
+        0,
+        document.documentElement.clientHeight - viewport.height - viewport.offsetTop,
+      );
+      const keyboardVisible =
+        touchLayout &&
+        editing &&
+        Math.max(obscuredHeight, window.screen.height - viewport.height) > 160;
+
+      if (!keyboardVisible) {
+        setKeyboardLayout((current) => (current === null ? current : null));
+        return;
+      }
+
+      const next = {
+        bottom: (obscuredHeight > 80 ? obscuredHeight : 0) + 8,
+        panelHeight: Math.max(180, Math.min(512, viewport.height - 84)),
+      };
+      setKeyboardLayout((current) =>
+        current &&
+        Math.abs(current.bottom - next.bottom) < 1 &&
+        Math.abs(current.panelHeight - next.panelHeight) < 1
+          ? current
+          : next,
+      );
+    };
+
+    const onFocusOut = () => window.setTimeout(updateKeyboardLayout, 60);
+    viewport.addEventListener("resize", updateKeyboardLayout);
+    viewport.addEventListener("scroll", updateKeyboardLayout);
+    window.addEventListener("resize", updateKeyboardLayout);
+    document.addEventListener("focusin", updateKeyboardLayout);
+    document.addEventListener("focusout", onFocusOut);
+    updateKeyboardLayout();
+
+    return () => {
+      viewport.removeEventListener("resize", updateKeyboardLayout);
+      viewport.removeEventListener("scroll", updateKeyboardLayout);
+      window.removeEventListener("resize", updateKeyboardLayout);
+      document.removeEventListener("focusin", updateKeyboardLayout);
+      document.removeEventListener("focusout", onFocusOut);
     };
   }, []);
 
@@ -228,12 +285,16 @@ export function Concierge() {
           onClick={requestClose}
         />
       ) : null}
-      <div className="fixed right-4 bottom-[5.25rem] z-[70] flex flex-col items-end gap-3 md:bottom-6 print:hidden">
+      <div
+        className="fixed right-4 bottom-[5.25rem] z-[70] flex flex-col items-end gap-3 md:bottom-6 print:hidden"
+        style={keyboardLayout ? { bottom: `${keyboardLayout.bottom}px` } : undefined}
+      >
         {open ? (
           <section
             role="dialog"
             aria-label={t.title}
             className="flex h-[min(32rem,calc(100dvh-9rem))] w-[min(22.5rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-[0_18px_50px_rgba(0,0,0,0.45)]"
+            style={keyboardLayout ? { height: `${keyboardLayout.panelHeight}px` } : undefined}
           >
             <header className="flex items-center gap-3 border-b border-border bg-surface px-4 py-3">
               <span className="flex size-9 items-center justify-center rounded-full bg-accent text-accent-fg">

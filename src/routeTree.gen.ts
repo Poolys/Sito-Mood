@@ -16,9 +16,11 @@ import { Route as ContattoRouteImport } from './routes/contatto'
 import { Route as LicensingRouteImport } from './routes/licensing'
 import { Route as PersonalizzaRouteImport } from './routes/personalizza'
 import { Route as ProgettiRouteImport } from './routes/progetti'
+import { Route as RichiesteRouteImport } from './routes/richieste'
+import { Route as SalvatiRouteImport } from './routes/salvati'
 import { Route as TerminiRouteImport } from './routes/termini'
-import { Route as ApiPoolyChatRouteImport } from './routes/api/pooly-chat'
-import { Route as ApiPoolySaveRouteImport } from './routes/api/pooly-save'
+import { Route as ApiConciergeRouteImport } from './routes/api/concierge'
+import { Route as ApiInquiryRouteImport } from './routes/api/inquiry'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoSlugRouteImport } from './routes/catalogo.$slug'
 
@@ -57,19 +59,29 @@ const ProgettiRoute = ProgettiRouteImport.update({
   path: '/progetti',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RichiesteRoute = RichiesteRouteImport.update({
+  id: '/richieste',
+  path: '/richieste',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalvatiRoute = SalvatiRouteImport.update({
+  id: '/salvati',
+  path: '/salvati',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TerminiRoute = TerminiRouteImport.update({
   id: '/termini',
   path: '/termini',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPoolyChatRoute = ApiPoolyChatRouteImport.update({
-  id: '/api/pooly-chat',
-  path: '/api/pooly-chat',
+const ApiConciergeRoute = ApiConciergeRouteImport.update({
+  id: '/api/concierge',
+  path: '/api/concierge',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPoolySaveRoute = ApiPoolySaveRouteImport.update({
-  id: '/api/pooly-save',
-  path: '/api/pooly-save',
+const ApiInquiryRoute = ApiInquiryRouteImport.update({
+  id: '/api/inquiry',
+  path: '/api/inquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoIndexRoute = CatalogoIndexRouteImport.update({
@@ -91,9 +103,11 @@ export interface FileRoutesByFullPath {
   '/licensing': typeof LicensingRoute
   '/personalizza': typeof PersonalizzaRoute
   '/progetti': typeof ProgettiRoute
+  '/richieste': typeof RichiesteRoute
+  '/salvati': typeof SalvatiRoute
   '/termini': typeof TerminiRoute
-  '/api/pooly-chat': typeof ApiPoolyChatRoute
-  '/api/pooly-save': typeof ApiPoolySaveRoute
+  '/api/concierge': typeof ApiConciergeRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/catalogo/$slug': typeof CatalogoSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
 }
@@ -104,9 +118,11 @@ export interface FileRoutesByTo {
   '/licensing': typeof LicensingRoute
   '/personalizza': typeof PersonalizzaRoute
   '/progetti': typeof ProgettiRoute
+  '/richieste': typeof RichiesteRoute
+  '/salvati': typeof SalvatiRoute
   '/termini': typeof TerminiRoute
-  '/api/pooly-chat': typeof ApiPoolyChatRoute
-  '/api/pooly-save': typeof ApiPoolySaveRoute
+  '/api/concierge': typeof ApiConciergeRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/catalogo/$slug': typeof CatalogoSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
 }
@@ -119,9 +135,11 @@ export interface FileRoutesById {
   '/licensing': typeof LicensingRoute
   '/personalizza': typeof PersonalizzaRoute
   '/progetti': typeof ProgettiRoute
+  '/richieste': typeof RichiesteRoute
+  '/salvati': typeof SalvatiRoute
   '/termini': typeof TerminiRoute
-  '/api/pooly-chat': typeof ApiPoolyChatRoute
-  '/api/pooly-save': typeof ApiPoolySaveRoute
+  '/api/concierge': typeof ApiConciergeRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/catalogo/$slug': typeof CatalogoSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
 }
@@ -135,9 +153,11 @@ export interface FileRouteTypes {
     | '/licensing'
     | '/personalizza'
     | '/progetti'
+    | '/richieste'
+    | '/salvati'
     | '/termini'
-    | '/api/pooly-chat'
-    | '/api/pooly-save'
+    | '/api/concierge'
+    | '/api/inquiry'
     | '/catalogo/$slug'
     | '/catalogo/'
   fileRoutesByTo: FileRoutesByTo
@@ -148,9 +168,11 @@ export interface FileRouteTypes {
     | '/licensing'
     | '/personalizza'
     | '/progetti'
+    | '/richieste'
+    | '/salvati'
     | '/termini'
-    | '/api/pooly-chat'
-    | '/api/pooly-save'
+    | '/api/concierge'
+    | '/api/inquiry'
     | '/catalogo/$slug'
     | '/catalogo'
   id:
@@ -162,9 +184,11 @@ export interface FileRouteTypes {
     | '/licensing'
     | '/personalizza'
     | '/progetti'
+    | '/richieste'
+    | '/salvati'
     | '/termini'
-    | '/api/pooly-chat'
-    | '/api/pooly-save'
+    | '/api/concierge'
+    | '/api/inquiry'
     | '/catalogo/$slug'
     | '/catalogo/'
   fileRoutesById: FileRoutesById
@@ -177,9 +201,11 @@ export interface RootRouteChildren {
   LicensingRoute: typeof LicensingRoute
   PersonalizzaRoute: typeof PersonalizzaRoute
   ProgettiRoute: typeof ProgettiRoute
+  RichiesteRoute: typeof RichiesteRoute
+  SalvatiRoute: typeof SalvatiRoute
   TerminiRoute: typeof TerminiRoute
-  ApiPoolyChatRoute: typeof ApiPoolyChatRoute
-  ApiPoolySaveRoute: typeof ApiPoolySaveRoute
+  ApiConciergeRoute: typeof ApiConciergeRoute
+  ApiInquiryRoute: typeof ApiInquiryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -233,6 +259,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgettiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/richieste': {
+      id: '/richieste'
+      path: '/richieste'
+      fullPath: '/richieste'
+      preLoaderRoute: typeof RichiesteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salvati': {
+      id: '/salvati'
+      path: '/salvati'
+      fullPath: '/salvati'
+      preLoaderRoute: typeof SalvatiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/termini': {
       id: '/termini'
       path: '/termini'
@@ -240,18 +280,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TerminiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/pooly-chat': {
-      id: '/api/pooly-chat'
-      path: '/api/pooly-chat'
-      fullPath: '/api/pooly-chat'
-      preLoaderRoute: typeof ApiPoolyChatRouteImport
+    '/api/concierge': {
+      id: '/api/concierge'
+      path: '/api/concierge'
+      fullPath: '/api/concierge'
+      preLoaderRoute: typeof ApiConciergeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/pooly-save': {
-      id: '/api/pooly-save'
-      path: '/api/pooly-save'
-      fullPath: '/api/pooly-save'
-      preLoaderRoute: typeof ApiPoolySaveRouteImport
+    '/api/inquiry': {
+      id: '/api/inquiry'
+      path: '/api/inquiry'
+      fullPath: '/api/inquiry'
+      preLoaderRoute: typeof ApiInquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/': {
@@ -293,9 +333,11 @@ const rootRouteChildren: RootRouteChildren = {
   LicensingRoute: LicensingRoute,
   PersonalizzaRoute: PersonalizzaRoute,
   ProgettiRoute: ProgettiRoute,
+  RichiesteRoute: RichiesteRoute,
+  SalvatiRoute: SalvatiRoute,
   TerminiRoute: TerminiRoute,
-  ApiPoolyChatRoute: ApiPoolyChatRoute,
-  ApiPoolySaveRoute: ApiPoolySaveRoute,
+  ApiConciergeRoute: ApiConciergeRoute,
+  ApiInquiryRoute: ApiInquiryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

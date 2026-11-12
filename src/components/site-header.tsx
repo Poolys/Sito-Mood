@@ -10,14 +10,16 @@ const links = [
   { to: "/", key: "home" as const },
   { to: "/catalogo", key: "catalog" as const },
   { to: "/progetti", key: "projects" as const },
+  { to: "/personalizza", key: "customize" as const },
+  { to: "/salvati", key: "saved" as const },
   { to: "/atelier", key: "atelier" as const },
-  { to: "/licensing", key: "licensing" as const },
   { to: "/contatto", key: "contact" as const },
 ];
 
 export function SiteHeader() {
   const lang = useMood((s) => s.lang);
   const setLang = useMood((s) => s.setLang);
+  const saved = useMood((s) => s.saved);
   const t = ui[lang];
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
@@ -76,6 +78,7 @@ export function SiteHeader() {
                 )}
               >
                 {t.nav[l.key]}
+                {l.key === "saved" && saved.length ? ` (${saved.length})` : ""}
               </Link>
             );
           })}
@@ -93,13 +96,15 @@ export function SiteHeader() {
                   lang === code ? "text-accent" : "hover:text-fg",
                 )}
                 aria-pressed={lang === code}
+                aria-label={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
+                title={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
               >
                 {code}
               </button>
             ))}
           </div>
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link to="/personalizza">{t.nav.customize}</Link>
+            <Link to="/personalizza">{t.openConfig}</Link>
           </Button>
           <button
             type="button"
@@ -125,10 +130,10 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              to="/personalizza"
-              className="mt-4 flex min-h-12 items-center font-display text-2xl italic text-accent"
+              to="/richieste"
+              className="flex min-h-12 items-center font-display text-2xl italic text-accent"
             >
-              {t.nav.customize}
+              {t.nav.requests}
             </Link>
           </nav>
         </div>

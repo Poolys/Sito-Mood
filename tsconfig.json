@@ -21,9 +21,11 @@
       "vite/client",
       "node"
     ],
-   "paths": {
-    "@/*": ["./src/*"]
-
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
     },
     "allowImportingTsExtensions": true
   },

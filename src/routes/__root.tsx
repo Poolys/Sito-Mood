@@ -1,9 +1,8 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
-import { AuthProvider } from "@/lib/auth/provider";
+import { Concierge } from "@/components/concierge";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
-import { PoolyAI } from "@/components/pooly-ai";
 import { useMood } from "@/lib/store";
 import appCss from "../styles.css?url";
 
@@ -24,10 +23,8 @@ function RootShell() {
   return (
     <>
       <PreviewHostBridge />
-      <AuthProvider>
-        <Outlet />
-      </AuthProvider>
-      <PoolyAI />
+      <Outlet />
+      <Concierge />
       <Toaster
         theme="dark"
         position="bottom-right"

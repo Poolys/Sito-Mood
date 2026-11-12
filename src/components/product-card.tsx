@@ -34,8 +34,9 @@ export function ProductCard({ product, large }: { product: Product; large?: bool
         type="button"
         onClick={() => toggleSaved(product.slug)}
         className="absolute top-3 right-3 z-10 flex size-11 items-center justify-center bg-bg/70 text-fg backdrop-blur-sm hover:text-accent"
-        aria-label={t.save}
+        aria-label={isSaved ? t.removeSaved : t.save}
         aria-pressed={isSaved}
+        title={isSaved ? t.removeSaved : t.save}
       >
         {isSaved ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
       </button>

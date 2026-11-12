@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { InquiryForm } from "@/components/inquiry-form";
+import { Configurator } from "@/components/configurator";
 import { PageHero, PageShell } from "@/components/page-shell";
 import { ui } from "@/lib/i18n";
 import { useMood } from "@/lib/store";
@@ -20,10 +20,8 @@ function Personalizza() {
 
   return (
     <PageShell>
-      <PageHero kicker={t.nav.customize} title={t.nav.customize} lead={t.customizeLead} />
-      <section className="mx-auto max-w-3xl px-5 py-16 md:px-8">
-        <InquiryForm defaultModel={modello ?? ""} />
-      </section>
+      <PageHero kicker={t.configKicker} title={t.configTitle} lead={t.configLead} />
+      <Configurator initialModel={modello ?? ""} />
     </PageShell>
   );
 }

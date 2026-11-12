@@ -41,7 +41,7 @@ function Home() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/atelier">{t.heroSecondary}</Link>
+              <Link to="/personalizza">{t.openConfig}</Link>
             </Button>
           </div>
         </div>

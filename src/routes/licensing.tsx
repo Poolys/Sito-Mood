@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { InquiryForm } from "@/components/inquiry-form";
 import { PageHero, PageShell } from "@/components/page-shell";
 import { ui } from "@/lib/i18n";
+import { CONTACT_EMAIL } from "@/lib/site";
 import { useMood } from "@/lib/store";
 
 export const Route = createFileRoute("/licensing")({ component: Licensing });
@@ -21,8 +22,8 @@ function Licensing() {
           <p>{t.atelierP2}</p>
           <p>{t.footerLicense}</p>
           <p>
-            <a className="text-accent hover:text-fg" href="mailto:pooly.s_mood@outlook.com">
-              pooly.s_mood@outlook.com
+            <a className="text-accent hover:text-fg" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
             </a>
           </p>
         </div>

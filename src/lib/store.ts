@@ -29,12 +29,6 @@ function readSaved(): string[] {
 export type Inquiry = {
   id: string;
   at: string;
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  role: string;
-  company: string;
   model: string;
   wood: string;
   steel: string;
@@ -42,7 +36,6 @@ export type Inquiry = {
   width: string;
   depth: string;
   bottles: string;
-  notes: string;
 };
 
 function readInquiries(): Inquiry[] {
@@ -50,7 +43,20 @@ function readInquiries(): Inquiry[] {
   try {
     const raw = window.localStorage.getItem(INQ_KEY);
     const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((item): item is Record<string, unknown> => !!item && typeof item === "object")
+      .map((item) => ({
+        id: typeof item.id === "string" ? item.id : `${Date.now()}-${Math.random()}`,
+        at: typeof item.at === "string" ? item.at : new Date().toISOString(),
+        model: typeof item.model === "string" ? item.model : "",
+        wood: typeof item.wood === "string" ? item.wood : "",
+        steel: typeof item.steel === "string" ? item.steel : "",
+        height: typeof item.height === "string" ? item.height : "",
+        width: typeof item.width === "string" ? item.width : "",
+        depth: typeof item.depth === "string" ? item.depth : "",
+        bottles: typeof item.bottles === "string" ? item.bottles : "",
+      }));
   } catch {
     return [];
   }
@@ -65,6 +71,7 @@ type Store = {
   setLang: (lang: Lang) => void;
   toggleSaved: (slug: string) => void;
   addInquiry: (data: Omit<Inquiry, "id" | "at">) => void;
+  removeInquiry: (id: string) => void;
 };
 
 export const useMood = create<Store>((set, get) => ({
@@ -74,7 +81,15 @@ export const useMood = create<Store>((set, get) => ({
   hydrated: false,
   hydrate: () => {
     if (get().hydrated) return;
-    set({ lang: readLang(), saved: readSaved(), inquiries: readInquiries(), hydrated: true });
+    const inquiries = readInquiries();
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem(INQ_KEY, JSON.stringify(inquiries));
+      } catch {
+        // Continue with the sanitized in-memory history if storage is blocked.
+      }
+    }
+    set({ lang: readLang(), saved: readSaved(), inquiries, hydrated: true });
   },
   setLang: (lang) => {
     window.localStorage.setItem(LANG_KEY, lang);
@@ -95,7 +110,20 @@ export const useMood = create<Store>((set, get) => ({
       at: new Date().toISOString(),
     };
     const next = [item, ...get().inquiries].slice(0, 20);
-    window.localStorage.setItem(INQ_KEY, JSON.stringify(next));
     set({ inquiries: next });
+    try {
+      window.localStorage.setItem(INQ_KEY, JSON.stringify(next));
+    } catch {
+      // Keep the in-memory confirmation even when browser storage is unavailable.
+    }
+  },
+  removeInquiry: (id) => {
+    const next = get().inquiries.filter((item) => item.id !== id);
+    set({ inquiries: next });
+    try {
+      window.localStorage.setItem(INQ_KEY, JSON.stringify(next));
+    } catch {
+      // The in-memory list still reflects the removal for this session.
+    }
   },
 }));

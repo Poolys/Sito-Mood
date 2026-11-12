@@ -3,6 +3,7 @@ import { Mail, MapPin } from "lucide-react";
 import { InquiryForm } from "@/components/inquiry-form";
 import { PageHero, PageShell } from "@/components/page-shell";
 import { ui } from "@/lib/i18n";
+import { CONTACT_EMAIL } from "@/lib/site";
 import { useMood } from "@/lib/store";
 
 export const Route = createFileRoute("/contatto")({ component: Contatto });
@@ -20,8 +21,8 @@ function Contatto() {
             <Mail className="mt-0.5 size-4 text-accent" />
             <div>
               <p className="text-[0.6875rem] uppercase tracking-[0.16em] text-subtle">{t.email}</p>
-              <a className="text-fg hover:text-accent" href="mailto:pooly.s_mood@outlook.com">
-                pooly.s_mood@outlook.com
+              <a className="text-fg hover:text-accent" href={`mailto:${CONTACT_EMAIL}`}>
+                {CONTACT_EMAIL}
               </a>
             </div>
           </div>

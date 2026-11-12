@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ui } from "@/lib/i18n";
+import { CONTACT_EMAIL } from "@/lib/site";
 import { useMood } from "@/lib/store";
 
 export function SiteFooter() {
@@ -29,6 +30,12 @@ export function SiteFooter() {
           <Link to="/licensing" className="text-muted hover:text-fg">
             {t.nav.licensing}
           </Link>
+          <Link to="/personalizza" className="text-muted hover:text-fg">
+            {t.nav.customize}
+          </Link>
+          <Link to="/salvati" className="text-muted hover:text-fg">
+            {t.nav.saved}
+          </Link>
           <Link to="/contatto" className="text-muted hover:text-fg">
             {t.nav.contact}
           </Link>
@@ -40,8 +47,8 @@ export function SiteFooter() {
           <p>{t.footerDesigned}</p>
           <p>{t.footerMaterials}</p>
           <p>
-            <a className="text-accent hover:text-fg" href="mailto:pooly.s_mood@outlook.com">
-              pooly.s_mood@outlook.com
+            <a className="text-accent hover:text-fg" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
             </a>
           </p>
           <p>{t.footerLicense}</p>

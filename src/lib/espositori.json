@@ -1,0 +1,720 @@
+{
+  "marca": "Pooly's Mood",
+  "linea": "Gaudium Vino",
+  "regola": "Rispondi solo con i dati di questo file. Non inventare prezzi, tempi di consegna o pezzi che non sono elencati.",
+  "materiali": {
+    "legni": [
+      {
+        "it": "Rovere massello del Piemonte",
+        "en": "Solid Piedmont oak",
+        "de": "Massive piemontesische Eiche"
+      },
+      {
+        "it": "Noce italiano",
+        "en": "Italian walnut",
+        "de": "Italienischer Nussbaum"
+      },
+      {
+        "it": "Castagno antico",
+        "en": "Ancient chestnut",
+        "de": "Altes Kastanienholz"
+      },
+      {
+        "it": "Ciliegio selezionato",
+        "en": "Selected cherry",
+        "de": "Ausgewählte Kirsche"
+      }
+    ],
+    "acciai": [
+      {
+        "it": "Inox specchio",
+        "en": "Mirror stainless steel",
+        "de": "Spiegel-Edelstahl"
+      },
+      {
+        "it": "Inox satinato",
+        "en": "Brushed stainless steel",
+        "de": "Gebürsteter Edelstahl"
+      },
+      {
+        "it": "Inox nero opaco",
+        "en": "Matte black stainless steel",
+        "de": "Mattschwarzer Edelstahl"
+      }
+    ]
+  },
+  "espositori": [
+    {
+      "id": "p-gaudium",
+      "nome": "P Gaudium",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A terra",
+        "en": "Freestanding",
+        "de": "Standmodelle"
+      },
+      "misure_mm": {
+        "larghezza": 600,
+        "altezza": 1400,
+        "profondita": 320
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "10 bottiglie orizzontali",
+        "en": "10 horizontal bottles",
+        "de": "10 liegende Flaschen"
+      },
+      "frase": {
+        "it": "Il tuo iniziale. Il nostro orgoglio.",
+        "en": "Your initial. Our pride.",
+        "de": "Dein Initial. Unser Stolz."
+      },
+      "descrizione": {
+        "it": "La P è la nostra firma nello spazio. Un telaio inox oversize accoglie dieci bottiglie in posa orizzontale, sulla base in legno massello incisa Gaudium de Vino. Non è un portabottiglie: è un monogramma abitato.",
+        "en": "The P is our signature in space. An oversized stainless frame holds ten bottles on their side, on a solid wood base engraved Gaudium de Vino. Not a rack — a lived-in monogram.",
+        "de": "Das P ist unsere Signatur im Raum. Ein überdimensionierter Edelstahlrahmen nimmt zehn liegende Flaschen auf, auf einem massiven Holzsockel mit Gravur Gaudium de Vino."
+      },
+      "scheda": {
+        "it": [
+          "Telaio inox a forma di P oversize",
+          "Base in legno con incisione Gaudium de Vino",
+          "10 posizioni bottiglie orizzontali",
+          "Altezza 1400 mm · Larghezza 600 mm",
+          "Produzione artigianale in Piemonte"
+        ],
+        "en": [
+          "Oversized P-shaped stainless steel frame",
+          "Wood base with Gaudium de Vino engraving",
+          "10 horizontal bottle positions",
+          "Height 1400 mm · Width 600 mm",
+          "Handcrafted in Piedmont"
+        ],
+        "de": [
+          "Überdimensionierter P-Rahmen aus Edelstahl",
+          "Holzsockel mit Gravur Gaudium de Vino",
+          "10 liegende Flaschenpositionen",
+          "Höhe 1400 mm · Breite 600 mm",
+          "Handgefertigt im Piemont"
+        ]
+      },
+      "alias": [
+        "gaudium",
+        "monogramma",
+        "iniziale",
+        "firma"
+      ]
+    },
+    {
+      "id": "art-wall",
+      "nome": "Art Wall",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A parete",
+        "en": "Wall",
+        "de": "Wand"
+      },
+      "misure_mm": {
+        "larghezza": 400,
+        "altezza": 800,
+        "profondita": 125
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "5 bottiglie",
+        "en": "5 bottles",
+        "de": "5 Flaschen"
+      },
+      "frase": {
+        "it": "Minimalismo verticale.",
+        "en": "Vertical minimalism.",
+        "de": "Vertikaler Minimalismus."
+      },
+      "descrizione": {
+        "it": "Cento millimetri di profondità. Cinque ripiani in legno naturale e un tubo inox Ø 42 mm: la cantina che non ruba la stanza, pensata per loft, suite e spazi raccolti.",
+        "en": "One hundred millimetres of depth. Five natural wood shelves and a Ø 42 mm stainless tube: a cellar that does not steal the room — for lofts, suites, compact spaces.",
+        "de": "Hundert Millimeter Tiefe. Fünf Naturholzregale und ein Edelstahlrohr Ø 42 mm: der Keller, der dem Raum nichts nimmt."
+      },
+      "scheda": {
+        "it": [
+          "Pezzo unico da parete",
+          "Profondità 120–130 mm",
+          "Larghezza 400 mm · Altezza 800 mm",
+          "5 ripiani in legno naturale",
+          "Tubo inox Ø 42 mm"
+        ],
+        "en": [
+          "Single wall-mounted piece",
+          "Depth 120–130 mm",
+          "Width 400 mm · Height 800 mm",
+          "5 natural wood shelves",
+          "Stainless tube Ø 42 mm"
+        ],
+        "de": [
+          "Einzelstück zur Wandmontage",
+          "Tiefe 120–130 mm",
+          "Breite 400 mm · Höhe 800 mm",
+          "5 Naturholzregale",
+          "Edelstahlrohr Ø 42 mm"
+        ]
+      },
+      "alias": [
+        "art",
+        "wall",
+        "minimal"
+      ]
+    },
+    {
+      "id": "scaffale-arco",
+      "nome": "Scaffale Arco",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A terra",
+        "en": "Freestanding",
+        "de": "Standmodelle"
+      },
+      "misure_mm": {
+        "larghezza": 600,
+        "altezza": 1500,
+        "profondita": 300
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "In base ai ripiani",
+        "en": "According to shelves",
+        "de": "Je nach Regalböden"
+      },
+      "frase": {
+        "it": "Eleganza curva, presenza silenziosa.",
+        "en": "Curved elegance, a quiet presence.",
+        "de": "Gebogene Eleganz, stille Präsenz."
+      },
+      "descrizione": {
+        "it": "Un arco in tubo inox lucido sostiene ripiani in legno massello. La curva è la firma: niente spigoli che alzano la voce, solo una presenza che tiene lo spazio.",
+        "en": "A polished stainless tube arch carries solid wood shelves. The curve is the signature: no edges that raise their voice, only a presence that holds the room.",
+        "de": "Ein polierter Edelstahlbogen trägt massive Holzregale. Die Kurve ist die Signatur: keine Kanten, die die Stimme heben."
+      },
+      "scheda": {
+        "it": [
+          "Struttura in tubo inox lucido",
+          "Ripiani in legno massello naturale",
+          "Larghezza 600 mm · Altezza 1500 mm · Profondità 300 mm",
+          "Capienza in base al numero di ripiani",
+          "Produzione artigianale italiana"
+        ],
+        "en": [
+          "Polished stainless tube structure",
+          "Natural solid wood shelves",
+          "Width 600 mm · Height 1500 mm · Depth 300 mm",
+          "Capacity according to shelf count",
+          "Italian artisan production"
+        ],
+        "de": [
+          "Polierte Edelstahlrohr-Struktur",
+          "Massive Naturholzregale",
+          "Breite 600 mm · Höhe 1500 mm · Tiefe 300 mm",
+          "Kapazität je nach Anzahl der Böden",
+          "Italienische Handfertigung"
+        ]
+      },
+      "alias": [
+        "scaffale",
+        "arco"
+      ]
+    },
+    {
+      "id": "magnium",
+      "nome": "Magnium",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A terra",
+        "en": "Freestanding",
+        "de": "Standmodelle"
+      },
+      "misure_mm": {
+        "larghezza": 800,
+        "altezza": 1000,
+        "profondita": 360
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "Magnum e grandi formati",
+        "en": "Magnum and large formats",
+        "de": "Magnum und Großformate"
+      },
+      "frase": {
+        "it": "Il sostegno per le grandi etichette.",
+        "en": "Support for your grand labels.",
+        "de": "Halt für die großen Etiketten."
+      },
+      "descrizione": {
+        "it": "Ripiani più profondi, campata più larga. Il Magnium è il pezzo che ospita le etichette che in cantina restano in piedi da sole. Acciaio lucido, legno massello, proporzioni da grande formato.",
+        "en": "Deeper shelves, a wider span. Magnium is the piece that hosts the labels that stand on their own in the cellar. Polished steel, solid wood, large-format proportions.",
+        "de": "Tiefere Böden, weitere Spannweite. Magnium beherbergt die Etiketten, die im Keller für sich stehen."
+      },
+      "scheda": {
+        "it": [
+          "Struttura in tubo inox lucido",
+          "Ripiani in legno massello naturale",
+          "Altezza 1000 mm · Larghezza 800 mm",
+          "Proporzioni per Magnum e jeroboam",
+          "Produzione artigianale italiana"
+        ],
+        "en": [
+          "Polished stainless tube structure",
+          "Natural solid wood shelves",
+          "Height 1000 mm · Width 800 mm",
+          "Proportions for Magnum and jeroboam",
+          "Italian artisan production"
+        ],
+        "de": [
+          "Polierte Edelstahlrohr-Struktur",
+          "Massive Naturholzregale",
+          "Höhe 1000 mm · Breite 800 mm",
+          "Proportionen für Magnum und Jeroboam",
+          "Italienische Handfertigung"
+        ]
+      },
+      "alias": [
+        "magnium",
+        "magnum",
+        "jeroboam"
+      ]
+    },
+    {
+      "id": "banchetti",
+      "nome": "Banchetti",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "Servizio",
+        "en": "Service",
+        "de": "Service"
+      },
+      "misure_mm": {
+        "larghezza": 900,
+        "altezza": 750,
+        "profondita": 600
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "Piano di servizio",
+        "en": "Service surface",
+        "de": "Servicefläche"
+      },
+      "frase": {
+        "it": "Fissi o mobili, sempre presenti.",
+        "en": "Fixed or mobile, always present.",
+        "de": "Fest oder mobil, immer da."
+      },
+      "descrizione": {
+        "it": "Il banchetto è il gesto del servizio: altezza 750 mm, piano 900 × 600, struttura inox e legno. Fisso in sala, oppure mobile per seguire la degustazione da un tavolo all’altro.",
+        "en": "The bench is the gesture of service: 750 mm high, a 900 × 600 top, steel and wood. Fixed in the room, or mobile to follow the tasting from table to table.",
+        "de": "Die Bank ist die Geste des Service: 750 mm hoch, Platte 900 × 600, Stahl und Holz. Fest im Raum oder mobil."
+      },
+      "scheda": {
+        "it": [
+          "Struttura in tubo inox lucido",
+          "Piano in legno massello naturale",
+          "Altezza 750 mm · Larghezza 900 mm · Profondità 600 mm",
+          "Versione fissa o su ruote",
+          "Produzione artigianale italiana"
+        ],
+        "en": [
+          "Polished stainless tube structure",
+          "Solid natural wood top",
+          "Height 750 mm · Width 900 mm · Depth 600 mm",
+          "Fixed or castered version",
+          "Italian artisan production"
+        ],
+        "de": [
+          "Polierte Edelstahlrohr-Struktur",
+          "Massive Naturholzplatte",
+          "Höhe 750 mm · Breite 900 mm · Tiefe 600 mm",
+          "Fest oder auf Rollen",
+          "Italienische Handfertigung"
+        ]
+      },
+      "alias": [
+        "banchetto",
+        "banchetti",
+        "degustazione"
+      ]
+    },
+    {
+      "id": "cut-art",
+      "nome": "Cut Art",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A terra",
+        "en": "Freestanding",
+        "de": "Standmodelle"
+      },
+      "misure_mm": {
+        "larghezza": 600,
+        "altezza": 1500,
+        "profondita": 300
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "3 bottiglie in presentazione",
+        "en": "3 bottles on display",
+        "de": "3 Flaschen in Präsentation"
+      },
+      "frase": {
+        "it": "Geometria, luce, presenza.",
+        "en": "Geometry, light, presence.",
+        "de": "Geometrie, Licht, Präsenz."
+      },
+      "descrizione": {
+        "it": "Tre bottiglie, non di più. Il Cut Art è un pezzo di presentazione: geometrie nette, LED calda nel taglio, modulo componibile per chi vuole una sequenza, non un magazzino.",
+        "en": "Three bottles, no more. Cut Art is a presentation piece: sharp geometry, warm LED in the cut, modular for those who want a sequence, not a warehouse.",
+        "de": "Drei Flaschen, nicht mehr. Cut Art ist ein Präsentationsstück: klare Geometrie, warmes LED im Schnitt, modular."
+      },
+      "scheda": {
+        "it": [
+          "Modulo componibile",
+          "Larghezza 600 mm · Altezza 1500 mm · Profondità 300 mm",
+          "Capienza 3 bottiglie in presentazione",
+          "Tagli geometrici con LED integrata",
+          "Legno massello e inox"
+        ],
+        "en": [
+          "Modular piece",
+          "Width 600 mm · Height 1500 mm · Depth 300 mm",
+          "Capacity: 3 bottles on display",
+          "Geometric cuts with integrated LED",
+          "Solid wood and stainless steel"
+        ],
+        "de": [
+          "Modular aufbaubar",
+          "Breite 600 mm · Höhe 1500 mm · Tiefe 300 mm",
+          "Kapazität: 3 Flaschen in Präsentation",
+          "Geometrische Schnitte mit integriertem LED",
+          "Massivholz und Edelstahl"
+        ]
+      },
+      "alias": [
+        "cut",
+        "geometria"
+      ]
+    },
+    {
+      "id": "imagine-capricci",
+      "nome": "Imagine Capricci",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "A terra",
+        "en": "Freestanding",
+        "de": "Standmodelle"
+      },
+      "misure_mm": {
+        "larghezza": 900,
+        "altezza": 2300,
+        "profondita": 420
+      },
+      "su_misura": false,
+      "capienza": {
+        "it": "Bottiglie, libri, oggetti",
+        "en": "Bottles, books, objects",
+        "de": "Flaschen, Bücher, Objekte"
+      },
+      "frase": {
+        "it": "Design che non chiede permesso.",
+        "en": "Design that does not ask permission.",
+        "de": "Design, das nicht um Erlaubnis fragt."
+      },
+      "descrizione": {
+        "it": "Alto 2300 mm, l’arco inox con curvatura superiore attraversa la stanza. Mensole in legno per bottiglie, libri, oggetti. Un pezzo che si comporta da architettura, non da mobile.",
+        "en": "At 2300 mm, the stainless arch with its upper curve crosses the room. Wood shelves for bottles, books, objects. A piece that behaves as architecture, not furniture.",
+        "de": "Mit 2300 mm durchquert der Edelstahlbogen den Raum. Holzregale für Flaschen, Bücher, Objekte. Ein Stück, das Architektur ist, nicht Möbel."
+      },
+      "scheda": {
+        "it": [
+          "Arco inox con curvatura superiore",
+          "Mensole in legno naturale",
+          "Altezza 2300 mm",
+          "Uso misto: vino, libri, oggetti",
+          "Pezzo statement per loft e showroom"
+        ],
+        "en": [
+          "Stainless arch with upper curvature",
+          "Natural wood shelves",
+          "Height 2300 mm",
+          "Mixed use: wine, books, objects",
+          "Statement piece for lofts and showrooms"
+        ],
+        "de": [
+          "Edelstahlbogen mit oberer Krümmung",
+          "Naturholzregale",
+          "Höhe 2300 mm",
+          "Mischnutzung: Wein, Bücher, Objekte",
+          "Statement für Lofts und Showrooms"
+        ]
+      },
+      "alias": [
+        "imagine",
+        "capricci",
+        "capriccio",
+        "libreria"
+      ]
+    },
+    {
+      "id": "wall-bar",
+      "nome": "Wall Bar",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "Servizio",
+        "en": "Service",
+        "de": "Service"
+      },
+      "misure_mm": {
+        "larghezza": 2400,
+        "altezza": 2400,
+        "profondita": 380
+      },
+      "su_misura": true,
+      "capienza": {
+        "it": "Esposizione, scorta, servizio",
+        "en": "Display, storage, service",
+        "de": "Präsentation, Lager, Service"
+      },
+      "frase": {
+        "it": "Bar verticale, pronto a servire.",
+        "en": "A vertical bar, ready to serve.",
+        "de": "Vertikale Bar, bereit zum Servieren."
+      },
+      "descrizione": {
+        "it": "Ripiani inclinati, barra portabicchieri, ante inferiori, tavolo estraibile inox e LED calda. Il Wall Bar è la parete che lavora: mostra, conserva, serve — senza invadere il pavimento.",
+        "en": "Inclined shelves, a glass rail, lower doors, a pull-out stainless table and warm LED. Wall Bar is the wall that works: it shows, stores, serves — without taking the floor.",
+        "de": "Geneigte Regale, Glashalter, untere Türen, ausziehbarer Edelstahltisch und warmes LED. Die Wand, die arbeitet."
+      },
+      "scheda": {
+        "it": [
+          "Ripiani inclinati e barra portabicchieri",
+          "Ante inferiori e ripiani nascosti",
+          "Tavolo estraibile in inox",
+          "LED calda e legno massello",
+          "Dimensioni su misura della parete"
+        ],
+        "en": [
+          "Inclined shelves and glass-holder rail",
+          "Lower doors and hidden shelves",
+          "Pull-out stainless steel table",
+          "Warm LED and solid wood",
+          "Dimensions made to the wall"
+        ],
+        "de": [
+          "Geneigte Regale und Glashalterstange",
+          "Untere Türen und verdeckte Fächer",
+          "Ausziehbarer Edelstahltisch",
+          "Warmes LED und Massivholz",
+          "Maße nach der Wand"
+        ]
+      },
+      "alias": [
+        "bar",
+        "bicchieri"
+      ]
+    },
+    {
+      "id": "allestimenti",
+      "nome": "Allestimenti",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "Allestimenti",
+        "en": "Installations",
+        "de": "Installationen"
+      },
+      "misure_mm": null,
+      "su_misura": true,
+      "capienza": {
+        "it": "Fino a 100+ bottiglie",
+        "en": "Up to 100+ bottles",
+        "de": "Bis zu 100+ Flaschen"
+      },
+      "frase": {
+        "it": "Progettati per valorizzare ogni bottiglia.",
+        "en": "Designed to honour every bottle.",
+        "de": "Entworfen, um jede Flasche zu ehren."
+      },
+      "descrizione": {
+        "it": "Enoteche, wine bar, sale degustazione: progettiamo la parete intera. Ripiani inclinati illuminati, struttura inox e legno, capienza oltre le cento bottiglie. Ogni allestimento è un disegno, non un catalogo.",
+        "en": "Wine shops, bars, tasting rooms: we design the whole wall. Lit inclined shelves, steel and wood, capacity beyond a hundred bottles. Every installation is a drawing, not a catalogue line.",
+        "de": "Weinhandlungen, Bars, Verkostungsräume: wir entwerfen die ganze Wand. Beleuchtete geneigte Regale, Stahl und Holz, über hundert Flaschen."
+      },
+      "scheda": {
+        "it": [
+          "Ripiani inclinati con LED calda",
+          "Struttura inox e legno naturale",
+          "Fino a 100+ bottiglie",
+          "Ideale per enoteche e degustazioni",
+          "Progetto su rilievo dello spazio"
+        ],
+        "en": [
+          "Inclined shelves with warm LED",
+          "Stainless and natural wood structure",
+          "Up to 100+ bottles",
+          "Ideal for wine bars and tastings",
+          "Designed from a site survey"
+        ],
+        "de": [
+          "Geneigte Regale mit warmem LED",
+          "Edelstahl- und Naturholzstruktur",
+          "Bis zu 100+ Flaschen",
+          "Ideal für Weinbars und Verkostungen",
+          "Entwurf nach Aufmaß vor Ort"
+        ]
+      },
+      "alias": [
+        "allestimento",
+        "allestimenti",
+        "enoteca"
+      ]
+    },
+    {
+      "id": "porta-gaudium",
+      "nome": "Porta Gaudium de Vino",
+      "tipo": "collezione",
+      "famiglia": {
+        "it": "Soglie",
+        "en": "Thresholds",
+        "de": "Schwellen"
+      },
+      "misure_mm": {
+        "larghezza": 900,
+        "altezza": 2200,
+        "profondita": 80
+      },
+      "su_misura": true,
+      "capienza": {
+        "it": "Soglia, non contenitore",
+        "en": "A threshold, not a container",
+        "de": "Eine Schwelle, kein Behälter"
+      },
+      "frase": {
+        "it": "L’ingresso al piacere.",
+        "en": "The entrance to pleasure.",
+        "de": "Der Eingang zum Genuss."
+      },
+      "descrizione": {
+        "it": "Telaio inox, vetro fumé inciso, pannello inferiore in massello, LED opzionale nel profilo. Singola o doppia. La porta non chiude la cantina: la annuncia.",
+        "en": "Stainless frame, engraved smoked glass, a solid wood lower panel, optional LED in the profile. Single or double. The door does not close the cellar: it announces it.",
+        "de": "Edelstahlrahmen, graviertes Rauchglas, unteres Massivholzfeld, optionales LED im Profil. Ein- oder zweiflügelig. Die Tür schließt den Keller nicht — sie kündigt ihn an."
+      },
+      "scheda": {
+        "it": [
+          "Telaio inox con vetro fumé inciso",
+          "Pannello inferiore in legno massello",
+          "LED opzionale nel telaio",
+          "Versione anta singola o doppia",
+          "Misure su vano esistente"
+        ],
+        "en": [
+          "Stainless frame with engraved smoked glass",
+          "Solid wood lower panel",
+          "Optional LED in the frame",
+          "Single or double leaf",
+          "Sized to the existing opening"
+        ],
+        "de": [
+          "Edelstahlrahmen mit graviertem Rauchglas",
+          "Unteres Feld aus Massivholz",
+          "Optionales LED im Rahmen",
+          "Ein- oder zweiflügelig",
+          "Maßgenau für die vorhandene Öffnung"
+        ]
+      },
+      "alias": [
+        "porta",
+        "soglia",
+        "ingresso",
+        "anta"
+      ]
+    },
+    {
+      "id": "baule-bruciato",
+      "nome": "Espositore baule bruciato",
+      "tipo": "pezzo unico",
+      "famiglia": {
+        "it": "Pezzo unico",
+        "en": "One-off",
+        "de": "Unikat"
+      },
+      "misure_mm": null,
+      "su_misura": true,
+      "capienza": {
+        "it": "Pezzo unico, non una serie",
+        "en": "One-off, not a series",
+        "de": "Unikat, keine Serie"
+      },
+      "frase": {
+        "it": "Pezzo unico · Piemonte",
+        "en": "One-off · Piedmont",
+        "de": "Unikat · Piemont"
+      },
+      "descrizione": {
+        "it": "Un baule di legno bruciato a venatura carbonizzata, scavato per accogliere le bottiglie. La materia parla prima della forma.",
+        "en": "A charred wood trunk, grain turned to carbon, carved to hold bottles. Material speaks before form.",
+        "de": "Ein verkohlter Holzstamm, die Maserung zu Kohle geworden, ausgehöhlt für Flaschen. Die Materie spricht vor der Form."
+      },
+      "scheda": {
+        "it": [
+          "Un baule di legno bruciato a venatura carbonizzata, scavato per accogliere le bottiglie. La materia parla prima della forma."
+        ],
+        "en": [
+          "A charred wood trunk, grain turned to carbon, carved to hold bottles. Material speaks before form."
+        ],
+        "de": [
+          "Ein verkohlter Holzstamm, die Maserung zu Kohle geworden, ausgehöhlt für Flaschen. Die Materie spricht vor der Form."
+        ]
+      },
+      "alias": [
+        "baule",
+        "bruciato",
+        "carbonizzata"
+      ]
+    },
+    {
+      "id": "tronco-naturale",
+      "nome": "Portabottiglie tronco naturale",
+      "tipo": "pezzo unico",
+      "famiglia": {
+        "it": "Pezzo unico",
+        "en": "One-off",
+        "de": "Unikat"
+      },
+      "misure_mm": null,
+      "su_misura": true,
+      "capienza": {
+        "it": "Pezzo unico, non una serie",
+        "en": "One-off, not a series",
+        "de": "Unikat, keine Serie"
+      },
+      "frase": {
+        "it": "Pezzo unico · Piemonte",
+        "en": "One-off · Piedmont",
+        "de": "Unikat · Piemont"
+      },
+      "descrizione": {
+        "it": "Un tronco d’albero lasciato quasi intero. I fori nascono dal legno, non dal disegno. La cantina come presenze vegetali.",
+        "en": "A tree trunk left almost whole. The openings are born from the wood, not from the drawing. The cellar as a living presence.",
+        "de": "Ein Stamm, fast ganz gelassen. Die Öffnungen entstehen aus dem Holz, nicht aus der Zeichnung."
+      },
+      "scheda": {
+        "it": [
+          "Un tronco d’albero lasciato quasi intero. I fori nascono dal legno, non dal disegno. La cantina come presenze vegetali."
+        ],
+        "en": [
+          "A tree trunk left almost whole. The openings are born from the wood, not from the drawing. The cellar as a living presence."
+        ],
+        "de": [
+          "Ein Stamm, fast ganz gelassen. Die Öffnungen entstehen aus dem Holz, nicht aus der Zeichnung."
+        ]
+      },
+      "alias": [
+        "tronco",
+        "albero",
+        "naturale"
+      ]
+    }
+  ]
+}

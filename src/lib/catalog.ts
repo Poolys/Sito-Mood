@@ -539,6 +539,60 @@ export const products: Product[] = [
       ],
     },
   },
+  {
+    slug: "scaffal-semplice",
+    name: "Scaffal Semplice",
+    category: "terra",
+    image: "/products/scaffal-semplice.jpg",
+    width: 0,
+    height: 0,
+    depth: 0,
+    customSize: true,
+    capacity: { it: "Da definire in base al progetto", en: "Set for each project", de: "Je nach Projekt festzulegen" },
+    claim: { it: "Essenziale, leggero, verticale.", en: "Essential, light, vertical.", de: "Wesentlich, leicht, vertikal." },
+    intro: {
+      it: "Una struttura pulita che valorizza gli ambienti alti.",
+      en: "A clean structure for tall interiors.",
+      de: "Eine klare Struktur für hohe Räume.",
+    },
+    story: {
+      it: "Scaffale verticale con due piedi anteriori e ancoraggio a soffitto. La presenza resta leggera e lascia parlare il vino.",
+      en: "A vertical shelf with two front feet and a ceiling anchor. Its light presence lets the wine take focus.",
+      de: "Ein vertikales Regal mit zwei vorderen Füßen und Deckenverankerung. Seine leichte Wirkung lässt dem Wein den Vortritt.",
+    },
+    specs: {
+      it: ["Due piedi anteriori", "Ancoraggio a soffitto", "Sviluppo verticale", "Misure da definire sul progetto"],
+      en: ["Two front feet", "Ceiling anchoring", "Vertical layout", "Dimensions set for the project"],
+      de: ["Zwei vordere Füße", "Deckenverankerung", "Vertikale Ausrichtung", "Maße nach Projekt"],
+    },
+  },
+  {
+    slug: "arredi",
+    name: "Arredi",
+    category: "servizio",
+    image: "/products/areddi.jpg",
+    width: 0,
+    height: 0,
+    depth: 0,
+    customSize: true,
+    capacity: { it: "Non applicabile", en: "Not applicable", de: "Nicht zutreffend" },
+    claim: { it: "Materia e funzione, in dialogo.", en: "Material and function in dialogue.", de: "Material und Funktion im Dialog." },
+    intro: {
+      it: "Complementi coordinati per l’universo Pooly's Mood.",
+      en: "Coordinated pieces for the Pooly's Mood world.",
+      de: "Passende Möbel für die Welt von Pooly's Mood.",
+    },
+    story: {
+      it: "Elementi modulari in inox e legno naturale. Sedute, tavolini e complementi si progettano in base allo spazio.",
+      en: "Modular pieces in stainless steel and natural wood. Seating, low tables and accessories are designed for the space.",
+      de: "Modulare Elemente aus Edelstahl und Naturholz. Sitzmöbel, niedrige Tische und Ergänzungen werden passend zum Raum entworfen.",
+    },
+    specs: {
+      it: ["Inox e legno naturale", "Elementi modulari", "Dimensioni configurabili", "Progetto su misura dello spazio"],
+      en: ["Stainless steel and natural wood", "Modular elements", "Configurable dimensions", "Designed for the space"],
+      de: ["Edelstahl und Naturholz", "Modulare Elemente", "Konfigurierbare Maße", "Passend zum Raum geplant"],
+    },
+  },
 ];
 
 export const projects: Project[] = [

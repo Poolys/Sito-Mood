@@ -1,0 +1,175 @@
+{
+  "brand": "Pooly's Mood",
+  "tagline": "Gaudium de Vino",
+  "concept": "Espositori come opere. Funzione come gesto.",
+  "materials_principali": [
+    "acciaio inox lucido o satinato",
+    "legno naturale (rovere, noce, castagno, ciliegio, quercia)"
+  ],
+  "modelli": [
+    {
+      "id": 1,
+      "nome": "Pooly's Mood",
+      "tipo": "espositore iconico autoportante",
+      "descrizione_breve": "Struttura iconica con telaio a M e lettera P centrale. Manifesto del brand.",
+      "struttura": "telaio inox a M con P interna portabottiglie",
+      "misure": "Altezza 1400 mm, larghezza 600 mm, 10 posizioni bottiglie orizzontali",
+      "caratteristiche": [
+        "design scultoreo",
+        "firma del brand",
+        "bottiglie integrate nella struttura"
+      ],
+      "utilizzo_ideale": "showroom, fiere, ingressi, spazi rappresentativi"
+    },
+    {
+      "id": 2,
+      "nome": "Art Wall",
+      "tipo": "espositore a parete",
+      "descrizione_breve": "Progettato per valorizzare ogni bottiglia.",
+      "struttura": "tubi inox verticali con ripiani in legno",
+      "misure": "Larghezza 400 mm, altezza 800 mm, profondità 120/130 mm, capacità 5 bottiglie",
+      "caratteristiche": [
+        "profondità ridotta",
+        "fissaggio a muro",
+        "design minimale"
+      ],
+      "utilizzo_ideale": "case, enoteche, uffici, pareti espositive"
+    },
+    {
+      "id": 3,
+      "nome": "Scaffal",
+      "tipo": "scaffale autoportante",
+      "descrizione_breve": "Scaffale stabile e deciso a quattro appoggi.",
+      "struttura": "telaio inox con quattro piedi",
+      "misure": "Larghezza 600 mm, altezza 1500 mm, profondità 300 mm",
+      "caratteristiche": [
+        "struttura indipendente",
+        "ripiani in legno",
+        "presenza solida"
+      ],
+      "utilizzo_ideale": "retail, showroom, cantine"
+    },
+    {
+      "id": 4,
+      "nome": "Scaffal Semplice",
+      "tipo": "scaffale verticale ancorato",
+      "descrizione_breve": "Essenziale, leggero, ancorato alla struttura.",
+      "struttura": "due piedi anteriori + ancoraggio chimico a soffitto",
+      "misure": "Larghezza 600 mm, altezza 1500 mm, profondità 300 mm",
+      "caratteristiche": [
+        "impatto visivo leggero",
+        "sviluppo verticale",
+        "massima pulizia formale"
+      ],
+      "utilizzo_ideale": "ambienti moderni, spazi alti"
+    },
+    {
+      "id": 5,
+      "nome": "Magnium",
+      "tipo": "espositore per bottiglie magnum",
+      "descrizione_breve": "Struttura dedicata alle grandi bottiglie.",
+      "struttura": "base circolare aperta in tubolare inox con montanti verticali",
+      "misure": "Altezza 1000 mm, larghezza 800 mm",
+      "caratteristiche": [
+        "ripiani con conca scavata",
+        "specifico per bottiglie magnum",
+        "design tecnico ed elegante"
+      ],
+      "utilizzo_ideale": "collezioni pregiate, esposizione speciale"
+    },
+    {
+      "id": 6,
+      "nome": "Cut Art",
+      "tipo": "cantinetta scultorea",
+      "descrizione_breve": "Geometria, luce, presenza.",
+      "struttura": "struttura geometrica a tagli con inserti in legno",
+      "misure": "Larghezza 600 mm, altezza 1500 mm, profondità 300 mm, capacità 3 bottiglie (presentazione)",
+      "caratteristiche": [
+        "tagli geometrici",
+        "illuminazione LED integrata",
+        "oggetto scenografico"
+      ],
+      "utilizzo_ideale": "sale degustazione, hotel, spazi di rappresentanza"
+    },
+    {
+      "id": 7,
+      "nome": "Capricci",
+      "tipo": "scaffale decorativo multifunzione",
+      "descrizione_breve": "Design che non chiede permessi.",
+      "struttura": "arco inox con mensole in legno",
+      "misure": "Altezza 2300 mm",
+      "caratteristiche": [
+        "forma libera",
+        "uso misto (vino, oggetti, libri)",
+        "forte identità visiva"
+      ],
+      "utilizzo_ideale": "living, hospitality, ambienti creativi"
+    },
+    {
+      "id": 8,
+      "nome": "Wall Bar",
+      "tipo": "bar a parete",
+      "descrizione_breve": "Esposizione e servizio in un unico gesto.",
+      "struttura": "modulo a parete con ripiani inclinati e barra",
+      "caratteristiche": [
+        "portabicchieri",
+        "ripiani illuminati",
+        "tavolo o piano di servizio"
+      ],
+      "utilizzo_ideale": "enoteche, ristoranti, hotel"
+    },
+    {
+      "id": 9,
+      "nome": "Arredi",
+      "tipo": "arredi su misura",
+      "descrizione_breve": "Complementi coordinati per l’universo Pooly’s Mood.",
+      "struttura": "elementi modulari in inox e legno",
+      "caratteristiche": [
+        "personalizzabili",
+        "coerenza materica",
+        "funzione e atmosfera"
+      ],
+      "utilizzo_ideale": "progetti completi, interni coordinati"
+    },
+    {
+      "id": 10,
+      "nome": "Porta Gaudium de Vino",
+      "tipo": "porta d’ingresso",
+      "descrizione_breve": "La soglia del piacere.",
+      "struttura": "telaio inox con pannello in legno e vetro inciso",
+      "caratteristiche": [
+        "branding inciso",
+        "LED opzionale",
+        "ingresso iconico"
+      ],
+      "utilizzo_ideale": "cantine, enoteche, spazi esclusivi"
+    },
+    {
+      "id": 11,
+      "nome": "Banchetti",
+      "tipo": "espositore mobile",
+      "descrizione_breve": "Fissi o mobili, offrono stabilità e funzionalità per eventi e scenografie.",
+      "struttura": "telaio inox con ripiani in legno naturale",
+      "misure": "Altezza 750 mm, larghezza 900 mm, profondità 600 mm",
+      "caratteristiche": [
+        "stabilità",
+        "versatilità",
+        "design adattabile"
+      ],
+      "utilizzo_ideale": "eventi, degustazioni, showrooms"
+    },
+    {
+      "id": 12,
+      "nome": "Allestimenti Pooly's Mood",
+      "tipo": "allestimenti personalizzati",
+      "descrizione_breve": "Soluzioni su misura per valorizzare spazi e bottiglie con luce e struttura coordinata.",
+      "struttura": "combinazione di elementi modulari in inox e legno",
+      "caratteristiche": [
+        "illuminazione LED",
+        "modularità",
+        "atmosfera scenografica"
+      ],
+      "utilizzo_ideale": "enoteche, hotel, ambienti di rappresentanza"
+    }
+  ]
+}

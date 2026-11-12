@@ -1,9 +1,34 @@
-import { MessageCircle, Send, X } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { conciergeCopy, replyToVisitor, type Lang } from "@/lib/concierge";
 import { useMood } from "@/lib/store";
 
 const KEY = "pm-concierge-v1";
+
+function AtelierRobot() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 64 64"
+      fill="none"
+      className="size-9 transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105"
+    >
+      <path d="M32 8V5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="32" cy="4" r="2.5" fill="#6b2c3e" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M15 27h-3m40 0h-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="11" cy="27" r="3" fill="#1d1914" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="53" cy="27" r="3" fill="#1d1914" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="15" y="12" width="34" height="34" rx="13" fill="#1d1914" stroke="currentColor" strokeWidth="2" />
+      <rect x="20" y="21" width="24" height="16" rx="8" fill="#ede6d9" />
+      <circle cx="27" cy="29" r="2" fill="#6b2c3e" />
+      <circle cx="37" cy="29" r="2" fill="#6b2c3e" />
+      <path d="M28 33c1.2 1.3 2.5 2 4 2s2.8-.7 4-2" stroke="#6b2c3e" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M22 47c1.8-3.2 5.4-5 10-5s8.2 1.8 10 5v8H22v-8Z" fill="#6b2c3e" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="m32 46 2 2-2 3-2-3 2-2Z" fill="#ede6d9" />
+      <path d="M27 56v3m10-3v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 type StoredMessage = {
   role: "visitor" | "atelier";
@@ -45,6 +70,7 @@ export function Concierge() {
   const lang = useMood((s) => s.lang) as Lang;
   const t = conciergeCopy[lang] ?? conciergeCopy.it;
   const [open, setOpen] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<StoredMessage[]>([]);
   const [ready, setReady] = useState(false);
@@ -52,17 +78,68 @@ export function Concierge() {
   const [conversationStatus, setConversationStatus] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesRef = useRef<StoredMessage[]>([]);
+  const sendingRef = useRef(false);
+  const pageHideSentRef = useRef(false);
+  const requestCloseRef = useRef<() => void>(() => {});
+  const interactedRef = useRef(false);
 
   useEffect(() => {
-    setMessages(readStored());
+    let hideTimer = 0;
+    const showTimer = window.setTimeout(() => {
+      if (interactedRef.current) return;
+      setHintVisible(true);
+      hideTimer = window.setTimeout(() => setHintVisible(false), 5000);
+    }, 10000);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const stored = readStored();
+    messagesRef.current = stored;
+    setMessages(stored);
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    const onPageHide = () => {
+      const transcript = messagesRef.current;
+      if (
+        pageHideSentRef.current ||
+        sendingRef.current ||
+        !transcript.some((message) => message.role === "visitor")
+      ) return;
+
+      const body = JSON.stringify({ lang, messages: transcript });
+      const queued = navigator.sendBeacon(
+        "/api/concierge",
+        new Blob([body], { type: "application/json" }),
+      );
+      if (queued) {
+        pageHideSentRef.current = true;
+        writeStored([]);
+        messagesRef.current = [];
+      } else {
+        void fetch("/api/concierge", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body,
+          keepalive: true,
+        });
+      }
+    };
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, [lang]);
 
   useEffect(() => {
     if (!open) return;
     inputRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") requestCloseRef.current();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -75,44 +152,63 @@ export function Concierge() {
 
   function send() {
     const text = draft.trim();
-    if (!text || sendingConversation) return;
+    if (!text || sendingRef.current) return;
     const now = new Date().toISOString();
     const next: StoredMessage[] = [
       ...messages,
       { role: "visitor", text, at: now },
       { role: "atelier", text: replyToVisitor(text, lang), at: now },
     ];
+    messagesRef.current = next;
     setMessages(next);
     writeStored(next);
     setConversationStatus("");
     setDraft("");
   }
 
-  async function sendConversation() {
-    if (sendingConversation || !messages.some((message) => message.role === "visitor")) return;
+  async function sendConversation(closeAfter = false) {
+    const transcript = messagesRef.current;
+    if (sendingRef.current || !transcript.some((message) => message.role === "visitor")) return;
+    sendingRef.current = true;
     setSendingConversation(true);
     setConversationStatus("");
     try {
       const response = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lang, messages }),
+        body: JSON.stringify({ lang, messages: transcript }),
+        keepalive: true,
       });
       const result = (await response.json()) as { ok?: boolean };
       if (!response.ok || !result.ok) throw new Error("concierge-delivery-failed");
       writeStored([]);
+      messagesRef.current = [];
       setMessages([]);
       setConversationStatus(t.conversationSent);
+      if (closeAfter) setOpen(false);
     } catch {
       setConversationStatus(t.conversationFailed);
     } finally {
+      sendingRef.current = false;
       setSendingConversation(false);
     }
   }
 
+  function requestClose() {
+    if (sendingRef.current) return;
+    if (messagesRef.current.some((message) => message.role === "visitor")) {
+      void sendConversation(true);
+    } else {
+      setOpen(false);
+    }
+  }
+
+  requestCloseRef.current = requestClose;
+
   function clearConversation() {
     if (sendingConversation) return;
     writeStored([]);
+    messagesRef.current = [];
     setMessages([]);
     setConversationStatus("");
   }
@@ -129,7 +225,7 @@ export function Concierge() {
           type="button"
           className="fixed inset-0 z-[65] cursor-default bg-black/20"
           aria-label={t.close}
-          onClick={() => setOpen(false)}
+          onClick={requestClose}
         />
       ) : null}
       <div className="fixed right-4 bottom-[5.25rem] z-[70] flex flex-col items-end gap-3 md:bottom-6 print:hidden">
@@ -151,7 +247,7 @@ export function Concierge() {
               </span>
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={requestClose}
                 aria-label={t.close}
                 className="flex size-8 items-center justify-center text-muted hover:text-fg"
               >
@@ -175,14 +271,9 @@ export function Concierge() {
             <p className="px-3 pt-2 text-[0.65rem] leading-snug text-subtle">{t.note}</p>
             {messages.some((message) => message.role === "visitor") ? (
               <div className="px-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => void sendConversation()}
-                  disabled={sendingConversation}
-                  className="min-h-10 w-full rounded-full bg-accent px-4 text-xs font-medium text-accent-fg disabled:opacity-60"
-                >
-                  {sendingConversation ? t.sendingConversation : t.sendConversation}
-                </button>
+                <p className="text-center text-xs text-muted" aria-live="polite">
+                  {sendingConversation ? t.sendingConversation : t.closeToSend}
+                </p>
                 <button
                   type="button"
                   onClick={clearConversation}
@@ -222,14 +313,35 @@ export function Concierge() {
             </form>
           </section>
         ) : null}
+        {hintVisible && !open ? (
+          <button
+            type="button"
+            onClick={() => {
+              interactedRef.current = true;
+              setHintVisible(false);
+              setOpen(true);
+            }}
+            className="relative rounded-xl border border-accent/50 bg-surface px-3 py-2 text-sm text-fg shadow-[0_8px_24px_rgba(0,0,0,0.35)] after:absolute after:-bottom-1.5 after:right-5 after:size-3 after:rotate-45 after:border-r after:border-b after:border-accent/50 after:bg-surface"
+          >
+            {t.prompt}
+          </button>
+        ) : null}
         <button
           type="button"
           aria-label={open ? t.close : t.open}
           aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-          className="flex size-14 items-center justify-center rounded-full border border-accent/70 bg-bg text-accent shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+          onClick={() => {
+            if (open) {
+              requestClose();
+            } else {
+              interactedRef.current = true;
+              setHintVisible(false);
+              setOpen(true);
+            }
+          }}
+          className="group flex size-14 items-center justify-center rounded-full border border-accent/70 bg-bg text-accent shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
         >
-          {open ? <X className="size-5" /> : <MessageCircle className="size-6" />}
+          {open ? <X className="size-5" /> : <AtelierRobot />}
         </button>
       </div>
     </>

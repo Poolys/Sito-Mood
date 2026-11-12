@@ -50,20 +50,6 @@
       "utilizzo_ideale": "retail, showroom, cantine"
     },
     {
-      "id": 4,
-      "nome": "Scaffal Semplice",
-      "tipo": "scaffale verticale ancorato",
-      "descrizione_breve": "Essenziale, leggero, ancorato alla struttura.",
-      "struttura": "due piedi anteriori + ancoraggio chimico a soffitto",
-      "misure": "Larghezza 600 mm, altezza 1500 mm, profondità 300 mm",
-      "caratteristiche": [
-        "impatto visivo leggero",
-        "sviluppo verticale",
-        "massima pulizia formale"
-      ],
-      "utilizzo_ideale": "ambienti moderni, spazi alti"
-    },
-    {
       "id": 5,
       "nome": "Magnium",
       "tipo": "espositore per bottiglie magnum",

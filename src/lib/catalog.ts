@@ -539,33 +539,7 @@ export const products: Product[] = [
       ],
     },
   },
-  {
-    slug: "scaffal-semplice",
-    name: "Scaffal Semplice",
-    category: "terra",
-    image: "/products/scaffal-semplice.jpg",
-    width: 0,
-    height: 0,
-    depth: 0,
-    customSize: true,
-    capacity: { it: "Da definire in base al progetto", en: "Set for each project", de: "Je nach Projekt festzulegen" },
-    claim: { it: "Essenziale, leggero, verticale.", en: "Essential, light, vertical.", de: "Wesentlich, leicht, vertikal." },
-    intro: {
-      it: "Una struttura pulita che valorizza gli ambienti alti.",
-      en: "A clean structure for tall interiors.",
-      de: "Eine klare Struktur für hohe Räume.",
-    },
-    story: {
-      it: "Scaffale verticale con due piedi anteriori e ancoraggio a soffitto. La presenza resta leggera e lascia parlare il vino.",
-      en: "A vertical shelf with two front feet and a ceiling anchor. Its light presence lets the wine take focus.",
-      de: "Ein vertikales Regal mit zwei vorderen Füßen und Deckenverankerung. Seine leichte Wirkung lässt dem Wein den Vortritt.",
-    },
-    specs: {
-      it: ["Due piedi anteriori", "Ancoraggio a soffitto", "Sviluppo verticale", "Misure da definire sul progetto"],
-      en: ["Two front feet", "Ceiling anchoring", "Vertical layout", "Dimensions set for the project"],
-      de: ["Zwei vordere Füße", "Deckenverankerung", "Vertikale Ausrichtung", "Maße nach Projekt"],
-    },
-  },
+
   {
     slug: "arredi",
     name: "Arredi",

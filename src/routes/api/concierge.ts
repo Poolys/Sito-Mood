@@ -38,8 +38,14 @@ export const Route = createFileRoute("/api/concierge")({
         const { deliverConversation } = await import("@/lib/concierge-mail.server");
         try {
           const result = await deliverConversation(transcript);
+          if (!result.ok) {
+            console.error("[api/concierge] email provider rejected delivery", {
+              status: result.status,
+            });
+          }
           return Response.json({ ok: result.ok }, { status: result.ok ? 200 : 502 });
-        } catch {
+        } catch (error) {
+          console.error("[api/concierge] email delivery failed", error);
           return Response.json({ ok: false }, { status: 502 });
         }
       },

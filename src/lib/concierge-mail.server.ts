@@ -28,8 +28,8 @@ export type InquiryEmail = {
 };
 
 function createTransport() {
-  const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
-  if (!pass) throw new Error("GMAIL_APP_PASSWORD is not configured");
+  const pass = process.env.EMAIL_PASS?.replace(/\s+/g, "");
+  if (!pass) throw new Error("EMAIL_PASS is not configured");
 
   return nodemailer.createTransport({
     host: "smtp.gmail.com",

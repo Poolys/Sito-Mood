@@ -6,7 +6,7 @@ Il sito è pensato per essere:
 3. Caricato su **GitHub**
 4. Pubblicato su **Vercel**
 
-Prima della pubblicazione, conferma il destinatario in `src/lib/site.ts` e configura la variabile segreta `GMAIL_APP_PASSWORD` su Vercel per l’account `italiano05pooly@gmail.com`.
+Prima della pubblicazione, conferma il destinatario in `src/lib/site.ts` e configura la variabile segreta `EMAIL_PASS` su Vercel per l’account `italiano05pooly@gmail.com`.
 
 ---
 
@@ -61,13 +61,13 @@ Il file `.gitignore` già esclude `.env`, `.vercel`, `node_modules`, ecc.
 
 ### Variabili d’ambiente (Environment Variables) su Vercel
 
-La variabile `GMAIL_APP_PASSWORD` è necessaria per inviare le e-mail via Gmail SMTP.
+La variabile `EMAIL_PASS` è necessaria per inviare le e-mail via Gmail SMTP.
 Configura la password come segreto nei deployment Production e Preview; non inserirla nel codice o in un file `.env`. Dopo averla salvata, crea un nuovo deployment.
 
 | Variabile | Quando serve | Note |
 |-----------|--------------|------|
 | `DATABASE_URL` | Solo se attivi Neon / Postgres | Lascia vuoto → usa PGLite locale (non persistente su Vercel) |
-| `GMAIL_APP_PASSWORD` | Invio e-mail da Gmail SMTP | Segreto server per `italiano05pooly@gmail.com`; non usare prefisso `VITE_` |
+| `EMAIL_PASS` | Invio e-mail da Gmail SMTP | Segreto server per `italiano05pooly@gmail.com`; non usare prefisso `VITE_` |
 
 ---
 
@@ -77,13 +77,13 @@ Configura la password come segreto nei deployment Production e Preview; non inse
 
 - L’indirizzo unico di ricezione è configurato in `src/lib/site.ts` e viene usato sia nel sito sia negli invii server.
 - Il modulo e il concierge inviano le e-mail tramite Gmail SMTP (`smtp.gmail.com`, porta 587), da `italiano05pooly@gmail.com` al destinatario configurato in `src/lib/site.ts`.
-- Dopo aver configurato `GMAIL_APP_PASSWORD` e pubblicato un nuovo deployment, prova sia la richiesta di contatto sia la chat. Se una prova fallisce, controlla i log runtime Vercel per il dettaglio SMTP.
+- Dopo aver configurato `EMAIL_PASS` e pubblicato un nuovo deployment, prova sia la richiesta di contatto sia la chat. Se una prova fallisce, controlla i log runtime Vercel per il dettaglio SMTP.
 
 - **Footer contatto**:  
   File: `src/components/site-footer.tsx`  
   Stesso indirizzo email.
 
-Gmail richiede una password per le app se la verifica in due passaggi è attiva. L’applicazione la legge esclusivamente dal segreto `GMAIL_APP_PASSWORD` lato server.
+Gmail richiede una password per le app se la verifica in due passaggi è attiva. L’applicazione la legge esclusivamente dal segreto `EMAIL_PASS` lato server.
 
 ### Dominio personalizzato
 

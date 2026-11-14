@@ -233,7 +233,7 @@ export function Concierge() {
     if (sendingRef.current || !transcript.some((message) => message.role === "visitor")) return;
     sendingRef.current = true;
     setSendingConversation(true);
-    setConversationStatus("");
+    setConversationStatus(t.sending);
     try {
       const response = await fetch("/api/concierge", {
         method: "POST",
@@ -325,17 +325,19 @@ export function Concierge() {
               ))}
             </div>
 
-            {conversationStatus === t.conversationFailed ? (
+            {conversationStatus ? (
               <div className="flex items-center justify-between gap-3 px-3 pt-2 text-xs text-muted" aria-live="polite">
                 <p>{conversationStatus}</p>
-                <button
-                  type="button"
-                  className="shrink-0 text-accent underline underline-offset-2 disabled:opacity-50"
-                  onClick={() => void sendConversation()}
-                  disabled={sendingConversation}
-                >
-                  {t.retry}
-                </button>
+                {conversationStatus === t.conversationFailed ? (
+                  <button
+                    type="button"
+                    className="shrink-0 text-accent underline underline-offset-2 disabled:opacity-50"
+                    onClick={() => void sendConversation()}
+                    disabled={sendingConversation}
+                  >
+                    {t.retry}
+                  </button>
+                ) : null}
               </div>
             ) : null}
             <form
@@ -367,6 +369,21 @@ export function Concierge() {
               </button>
             </form>
           </section>
+        ) : null}
+        {!open && conversationStatus ? (
+          <div className="flex max-w-[min(22.5rem,calc(100vw-2rem))] items-center gap-3 rounded-xl border border-accent/50 bg-surface px-4 py-3 text-sm text-fg shadow-[0_8px_24px_rgba(0,0,0,0.35)]" role="status" aria-live="polite">
+            <span className="flex-1">{conversationStatus}</span>
+            {conversationStatus === t.conversationFailed ? (
+              <button
+                type="button"
+                className="shrink-0 text-accent underline underline-offset-2 disabled:opacity-50"
+                onClick={() => void sendConversation()}
+                disabled={sendingConversation}
+              >
+                {t.retry}
+              </button>
+            ) : null}
+          </div>
         ) : null}
         {hintVisible && !open ? (
           <button

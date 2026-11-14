@@ -176,16 +176,21 @@ export function Concierge() {
         new Blob([body], { type: "application/json" }),
       );
       if (queued) {
+        // sendBeacon only confirms that the browser queued the request, not delivery.
         pageHideSentRef.current = true;
-        writeStored([]);
-        messagesRef.current = [];
       } else {
         void fetch("/api/concierge", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body,
           keepalive: true,
-        });
+        }).then(async (response) => {
+          const result = (await response.json().catch(() => null)) as { ok?: boolean } | null;
+          if (response.ok && result?.ok) {
+            writeStored([]);
+            messagesRef.current = [];
+          }
+        }).catch(() => {});
       }
     };
     window.addEventListener("pagehide", onPageHide);
@@ -241,7 +246,7 @@ export function Concierge() {
       writeStored([]);
       messagesRef.current = [];
       setMessages([]);
-      setConversationStatus(t.conversationSent);
+      setConversationStatus("");
       if (closeAfter) setOpen(false);
     } catch {
       setConversationStatus(t.conversationFailed);
@@ -262,13 +267,6 @@ export function Concierge() {
 
   requestCloseRef.current = requestClose;
 
-  function clearConversation() {
-    if (sendingConversation) return;
-    writeStored([]);
-    messagesRef.current = [];
-    setMessages([]);
-    setConversationStatus("");
-  }
 
   const shown: StoredMessage[] =
     messages.length > 0
@@ -329,23 +327,10 @@ export function Concierge() {
                 </p>
               ))}
             </div>
-            <p className="px-3 pt-2 text-[0.65rem] leading-snug text-subtle">{t.note}</p>
-            {messages.some((message) => message.role === "visitor") ? (
-              <div className="px-3 pt-2">
-                <p className="text-center text-xs text-muted" aria-live="polite">
-                  {sendingConversation ? t.sendingConversation : t.closeToSend}
-                </p>
-                <button
-                  type="button"
-                  onClick={clearConversation}
-                  disabled={sendingConversation}
-                  className="mt-1 min-h-10 w-full px-4 text-xs text-muted underline underline-offset-4 hover:text-fg disabled:opacity-60"
-                >
-                  {t.clearConversation}
-                </button>
-              </div>
+
+            {conversationStatus === t.conversationFailed ? (
+              <p className="px-3 pt-2 text-xs text-muted" aria-live="polite">{conversationStatus}</p>
             ) : null}
-            <p className="px-3 pt-2 text-xs text-muted" aria-live="polite">{conversationStatus}</p>
             <form
               className="flex items-center gap-2 px-3 pt-2 pb-3"
               onSubmit={(event) => {
@@ -387,23 +372,21 @@ export function Concierge() {
             {t.prompt}
           </button>
         ) : null}
-        <button
-          type="button"
-          aria-label={open ? t.close : t.open}
-          aria-expanded={open}
-          onClick={() => {
-            if (open) {
-              requestClose();
-            } else {
+        {!open ? (
+          <button
+            type="button"
+            aria-label={t.open}
+            aria-expanded={false}
+            onClick={() => {
               interactedRef.current = true;
               setHintVisible(false);
               setOpen(true);
-            }
-          }}
-          className="group flex size-14 items-center justify-center rounded-full border border-accent/70 bg-bg text-accent shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
-        >
-          {open ? <X className="size-5" /> : <AtelierRobot />}
-        </button>
+            }}
+            className="group flex size-14 items-center justify-center rounded-full border border-accent/70 bg-bg text-accent shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+          >
+            <AtelierRobot />
+          </button>
+        ) : null}
       </div>
     </>
   );

@@ -86,6 +86,30 @@ function fold(value: string) {
     .replace(/\p{M}/gu, "");
 }
 
+// Prefer the visitor's message language; use the site's language for ambiguous text.
+function languageOf(question: string, fallback: Lang): Lang {
+  const q = ` ${fold(question).replace(/[^a-z0-9]+/g, " ").trim()} `;
+  const greeting = q.trim();
+  if (/^(ciao|salve|buongiorno|buonasera|buondi)$/.test(greeting)) return "it";
+  if (/^(hello|hi|hey)$/.test(greeting)) return "en";
+  if (/^(hallo|guten tag|servus)$/.test(greeting)) return "de";
+  if (greeting.length < 5) return fallback;
+
+  const clues: Record<Lang, string[]> = {
+    it: [" il ", " lo ", " la ", " gli ", " che ", " come ", " quanto ", " quale ", " quali ", " avete ", " vorrei ", " grazie ", " dimensioni ", " misura ", " altezza ", " larghezza ", " profondita ", " capienza ", " materiale ", " legno ", " acciaio "],
+    en: [" the ", " is ", " are ", " what ", " how ", " which ", " do you ", " can you ", " please ", " thanks ", " size ", " height ", " width ", " depth ", " capacity ", " dimensions ", " material ", " made ", " wood ", " steel "],
+    de: [" der ", " die ", " das ", " ist ", " sind ", " was ", " wie ", " welche ", " haben ", " konnen ", " bitte ", " danke ", " grosse ", " hohe ", " breite ", " tiefe ", " kapazitat ", " masse ", " material ", " holz ", " stahl "],
+  };
+  const scores = (Object.keys(clues) as Lang[])
+    .map((language) => ({
+      language,
+      score: clues[language].reduce((total, clue) => total + (q.includes(clue) ? 1 : 0), 0),
+    }))
+    .sort((a, b) => b.score - a.score);
+  return scores[0].score > 0 && scores[0].score > scores[1].score
+    ? scores[0].language
+    : fallback;
+}
 function isGreeting(q: string) {
   return /^(ciao|salve|buongiorno|buonasera|buondi|hey|hello|hi|hallo|guten tag|servus|bonjour)\b/.test(q);
 }
@@ -199,6 +223,7 @@ function detail(ex: Exhibitor, lang: Lang, focus: Focus) {
 }
 
 export function replyToVisitor(question: string, lang: Lang) {
+  lang = languageOf(question, lang);
   const q = fold(question.trim());
   const t = copy[lang];
   if (!q) return t.greet;
@@ -244,11 +269,6 @@ export const conciergeCopy = {
     close: "Chiudi",
     open: "Apri la chat degli espositori",
     prompt: "Posso aiutarti?",
-    note: "La conversazione viene inviata via email quando chiudi la chat o lasci il sito.",
-    closeToSend: "Chiudi la chat per inviare la conversazione all’atelier.",
-    clearConversation: "Cancella chat da questo dispositivo",
-    sendingConversation: "Invio in corso…",
-    conversationSent: "Conversazione inviata all’atelier.",
     conversationFailed: "Invio non riuscito. La conversazione è ancora salvata qui.",
   },
   en: {
@@ -259,11 +279,6 @@ export const conciergeCopy = {
     close: "Close",
     open: "Open the display chat",
     prompt: "Can I help?",
-    note: "The conversation is emailed when you close the chat or leave the site.",
-    closeToSend: "Close the chat to send the conversation to the atelier.",
-    clearConversation: "Clear chat from this device",
-    sendingConversation: "Sending…",
-    conversationSent: "Conversation sent to the atelier.",
     conversationFailed: "Couldn't send it. The conversation is still saved here.",
   },
   de: {
@@ -274,11 +289,6 @@ export const conciergeCopy = {
     close: "Schließen",
     open: "Display-Chat öffnen",
     prompt: "Kann ich helfen?",
-    note: "Das Gespräch wird per E-Mail gesendet, wenn Sie den Chat schließen oder die Website verlassen.",
-    closeToSend: "Schließen Sie den Chat, um das Gespräch an das Atelier zu senden.",
-    clearConversation: "Chat auf diesem Gerät löschen",
-    sendingConversation: "Wird gesendet…",
-    conversationSent: "Gespräch an das Atelier gesendet.",
     conversationFailed: "Senden fehlgeschlagen. Das Gespräch ist weiterhin hier gespeichert.",
   },
 } as const;

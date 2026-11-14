@@ -1,7 +1,8 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import { Concierge } from "@/components/concierge";
+import { TermsGate, TERMS_ACCEPTANCE_KEY, TERMS_ACCEPTANCE_VERSION } from "@/components/terms-gate";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { useMood } from "@/lib/store";
 import appCss from "../styles.css?url";
@@ -11,6 +12,27 @@ const APP_NAME = "Pooly's Mood — Gaudium Vino";
 function RootShell() {
   const hydrate = useMood((s) => s.hydrate);
   const lang = useMood((s) => s.lang);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsReady, setTermsReady] = useState(false);
+
+  useEffect(() => {
+    try {
+      setTermsAccepted(window.localStorage.getItem(TERMS_ACCEPTANCE_KEY) === TERMS_ACCEPTANCE_VERSION);
+    } catch {
+      setTermsAccepted(false);
+    } finally {
+      setTermsReady(true);
+    }
+  }, []);
+
+  function acceptTerms() {
+    try {
+      window.localStorage.setItem(TERMS_ACCEPTANCE_KEY, TERMS_ACCEPTANCE_VERSION);
+    } catch {
+      // Keep access available for this session when browser storage is blocked.
+    }
+    setTermsAccepted(true);
+  }
 
   useEffect(() => {
     hydrate();
@@ -23,19 +45,22 @@ function RootShell() {
   return (
     <>
       <PreviewHostBridge />
-      <Outlet />
-      <Concierge />
-      <Toaster
-        theme="dark"
-        position="bottom-right"
-        toastOptions={{
-          style: {
-            background: "#151310",
-            color: "#ede6d9",
-            border: "1px solid #2a261f",
-          },
-        }}
-      />
+      <div hidden={!termsAccepted} aria-hidden={!termsAccepted} inert={!termsAccepted}>
+        <Outlet />
+        <Concierge />
+        <Toaster
+          theme="dark"
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: "#151310",
+              color: "#ede6d9",
+              border: "1px solid #2a261f",
+            },
+          }}
+        />
+      </div>
+      <TermsGate open={!termsReady || !termsAccepted} loading={!termsReady} onAccept={acceptTerms} />
       <Scripts />
     </>
   );

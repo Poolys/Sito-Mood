@@ -228,7 +228,7 @@ export function Concierge() {
     setDraft("");
   }
 
-  async function sendConversation(closeAfter = false) {
+  async function sendConversation() {
     const transcript = messagesRef.current;
     if (sendingRef.current || !transcript.some((message) => message.role === "visitor")) return;
     sendingRef.current = true;
@@ -247,7 +247,6 @@ export function Concierge() {
       messagesRef.current = [];
       setMessages([]);
       setConversationStatus("");
-      if (closeAfter) setOpen(false);
     } catch {
       setConversationStatus(t.conversationFailed);
     } finally {
@@ -257,11 +256,9 @@ export function Concierge() {
   }
 
   function requestClose() {
-    if (sendingRef.current) return;
+    setOpen(false);
     if (messagesRef.current.some((message) => message.role === "visitor")) {
-      void sendConversation(true);
-    } else {
-      setOpen(false);
+      void sendConversation();
     }
   }
 
@@ -329,7 +326,17 @@ export function Concierge() {
             </div>
 
             {conversationStatus === t.conversationFailed ? (
-              <p className="px-3 pt-2 text-xs text-muted" aria-live="polite">{conversationStatus}</p>
+              <div className="flex items-center justify-between gap-3 px-3 pt-2 text-xs text-muted" aria-live="polite">
+                <p>{conversationStatus}</p>
+                <button
+                  type="button"
+                  className="shrink-0 text-accent underline underline-offset-2 disabled:opacity-50"
+                  onClick={() => void sendConversation()}
+                  disabled={sendingConversation}
+                >
+                  {t.retry}
+                </button>
+              </div>
             ) : null}
             <form
               className="flex items-center gap-2 px-3 pt-2 pb-3"

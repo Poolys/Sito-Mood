@@ -8,63 +8,39 @@ export const TERMS_ACCEPTANCE_VERSION = "2026-11-14";
 
 const copy: Record<Lang, {
   title: string;
-  subtitle: string;
-  chatTitle: string;
-  chatNotice: string;
-  optional: string;
-  readTerms: string;
-  providerNote: string;
-  providerLink: string;
+  loading: string;
   checkbox: string;
+  readTerms: string;
   decline: string;
   accept: string;
   declined: string;
-  loading: string;
 }> = {
   it: {
     title: "Prima di entrare",
-    subtitle: "Per continuare, leggi i Termini e conferma di accettarli.",
-    chatTitle: "Assistente AI: come viene usata la chat",
-    chatNotice: "La chat è facoltativa. La direzione di Pooly's Mood visualizza i messaggi e li usa soltanto per rispondere alle informazioni richieste e valutare le esigenze di produzione, non per pubblicità. Per recapitare la conversazione all'atelier, il sito la invia tramite Gmail di Google. Per ricordare la scelta, il sito salva un indicatore nel browser. Evita di inserire dati sensibili.",
-    optional: "Puoi visitare il sito senza usare la chat.",
-    readTerms: "Leggi i Termini e le informazioni complete",
-    providerNote: "Google tratta i dati necessari alla consegna dell'e-mail secondo la propria informativa sulla privacy:",
-    providerLink: "Informativa privacy Google",
-    checkbox: "Ho letto e accetto i Termini e condizioni.",
+    loading: "Sto verificando l'accettazione…",
+    checkbox: "Ho letto e accetto i",
+    readTerms: "Termini e condizioni",
     decline: "Declino",
     accept: "Accetto ed entro",
     declined: "Hai rifiutato i Termini. Per entrare nel sito devi accettarli; puoi chiudere questa scheda.",
-    loading: "Sto verificando l'accettazione…",
   },
   en: {
     title: "Before you enter",
-    subtitle: "To continue, read the Terms and confirm that you accept them.",
-    chatTitle: "AI assistant: how the chat is used",
-    chatNotice: "The chat is optional. Pooly's Mood management can view messages and uses them only to answer the information requested and assess production needs, not for advertising. To deliver the conversation to the atelier, the site sends it through Google Gmail. The site stores an acceptance marker in your browser to remember your choice. Do not enter sensitive data.",
-    optional: "You can browse the site without using the chat.",
-    readTerms: "Read the Terms and full information",
-    providerNote: "Google processes the data needed to deliver the email under its privacy policy:",
-    providerLink: "Google Privacy Policy",
-    checkbox: "I have read and accept the Terms and conditions.",
+    loading: "Checking your acceptance…",
+    checkbox: "I have read and accept the",
+    readTerms: "Terms and conditions",
     decline: "Decline",
     accept: "Accept and enter",
     declined: "You declined the Terms. You must accept them to enter the site; you can close this tab.",
-    loading: "Checking your acceptance…",
   },
   de: {
     title: "Bevor Sie eintreten",
-    subtitle: "Lesen Sie zum Fortfahren die Bedingungen und bestätigen Sie Ihre Zustimmung.",
-    chatTitle: "KI-Assistent: Verwendung des Chats",
-    chatNotice: "Der Chat ist freiwillig. Die Leitung von Pooly's Mood kann die Nachrichten einsehen und verwendet sie ausschließlich, um die erbetenen Informationen zu beantworten und Produktionswünsche zu prüfen, nicht für Werbung. Zur Zustellung an das Atelier sendet die Website die Unterhaltung über Google Gmail. Die Website speichert Ihre Zustimmung im Browser. Geben Sie keine sensiblen Daten ein.",
-    optional: "Sie können die Website ohne Nutzung des Chats besuchen.",
-    readTerms: "Bedingungen und vollständige Informationen lesen",
-    providerNote: "Google verarbeitet die für die E-Mail-Zustellung erforderlichen Daten gemäß seiner Datenschutzerklärung:",
-    providerLink: "Google-Datenschutzerklärung",
-    checkbox: "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie.",
+    loading: "Zustimmung wird geprüft…",
+    checkbox: "Ich habe die",
+    readTerms: "Nutzungsbedingungen gelesen und akzeptiere sie",
     decline: "Ablehnen",
     accept: "Akzeptieren und eintreten",
     declined: "Sie haben die Bedingungen abgelehnt. Für den Zugang müssen Sie sie akzeptieren; Sie können diesen Tab schließen.",
-    loading: "Zustimmung wird geprüft…",
   },
 };
 
@@ -82,56 +58,34 @@ export function TermsGate({
   const site = ui[lang] ?? ui.it;
   const [checked, setChecked] = useState(false);
   const [declined, setDeclined] = useState(false);
+  const [termsExpanded, setTermsExpanded] = useState(false);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-bg/95 p-3 backdrop-blur-md sm:p-6">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-bg/95 p-4 backdrop-blur-md sm:p-6">
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="terms-gate-title"
-        aria-describedby="terms-gate-description"
-        className="flex max-h-[94dvh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-accent/50 bg-surface shadow-[0_24px_80px_rgba(0,0,0,0.65)]"
+        className="w-full max-w-md rounded-2xl border border-accent/50 bg-surface px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.65)] sm:px-8 sm:py-8"
       >
-        <header className="border-b border-border px-5 py-5 sm:px-8 sm:py-7">
-          <p className="text-[0.6875rem] uppercase tracking-[0.28em] text-accent">Pooly's Mood</p>
-          <h1 id="terms-gate-title" className="mt-2 font-display text-3xl italic text-fg sm:text-4xl">
-            {loading ? "Pooly's Mood" : t.title}
+        <header className="text-center">
+          <img
+            src="/favicon.svg"
+            alt=""
+            className="mx-auto size-14 rounded-xl border border-accent/30 bg-bg p-2"
+          />
+          <p className="mt-3 font-display text-3xl italic leading-none text-fg">Pooly's Mood</p>
+          <p className="mt-1 text-[0.625rem] uppercase tracking-[0.3em] text-accent">Gaudium Vino</p>
+          <h1 id="terms-gate-title" className="mt-5 font-display text-xl italic text-muted">
+            {loading ? t.loading : t.title}
           </h1>
-          <p id="terms-gate-description" className="mt-2 text-sm leading-relaxed text-muted">
-            {loading ? t.loading : t.subtitle}
-          </p>
         </header>
 
         {!loading ? (
-          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-5 sm:px-8">
-            <section className="rounded-xl border border-border bg-bg/70 p-4">
-              <h2 className="font-display text-xl italic text-fg">{t.chatTitle}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{t.chatNotice}</p>
-              <p className="mt-2 text-xs text-subtle">{t.optional}</p>
-            </section>
-
-            <details className="rounded-xl border border-border bg-bg/40 p-4">
-              <summary className="cursor-pointer text-sm font-medium text-accent">{t.readTerms}</summary>
-              <div className="mt-4 max-h-[26dvh] space-y-3 overflow-y-auto pr-2 text-sm leading-relaxed text-muted">
-                {site.termsBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              </div>
-            </details>
-
-            <p className="text-xs leading-relaxed text-subtle">
-              {t.providerNote}{" "}
-              <a
-                className="text-accent underline underline-offset-4 hover:text-fg"
-                href="https://policies.google.com/privacy"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t.providerLink}
-              </a>
-            </p>
-
-            <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-bg/50 p-4 text-sm leading-relaxed text-fg">
+          <div className="mt-6">
+            <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-bg/50 px-3 py-3 text-center text-sm leading-snug text-fg">
               <input
                 id="terms-accepted"
                 name="termsAccepted"
@@ -141,14 +95,32 @@ export function TermsGate({
                   setChecked(event.target.checked);
                   setDeclined(false);
                 }}
-                className="mt-1 size-4 shrink-0 accent-[var(--color-accent)]"
+                className="size-4 shrink-0 accent-[var(--color-accent)]"
               />
-              <span>{t.checkbox}</span>
-            </label>
+              <label htmlFor="terms-accepted">{t.checkbox}</label>
+              <button
+                type="button"
+                aria-expanded={termsExpanded}
+                aria-controls="terms-gate-full-terms"
+                className="text-accent underline underline-offset-4 hover:text-fg"
+                onClick={() => setTermsExpanded((expanded) => !expanded)}
+              >
+                {t.readTerms}
+              </button>
+            </div>
 
-            {declined ? <p role="status" className="text-sm text-muted">{t.declined}</p> : null}
+            {termsExpanded ? (
+              <div id="terms-gate-full-terms" className="mt-3 max-h-48 space-y-3 overflow-y-auto rounded-xl border border-border bg-bg/50 p-4 text-xs leading-relaxed text-muted">
+                {site.termsBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                <a className="text-accent underline underline-offset-4 hover:text-fg" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
+                  {lang === "de" ? "Google-Datenschutzerklärung" : lang === "en" ? "Google Privacy Policy" : "Informativa privacy Google"}
+                </a>
+              </div>
+            ) : null}
 
-            <div className="mt-auto flex flex-col-reverse gap-3 pt-1 sm:flex-row sm:justify-end">
+            {declined ? <p role="status" className="mt-3 text-center text-sm text-muted">{t.declined}</p> : null}
+
+            <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-center">
               <button
                 type="button"
                 onClick={() => setDeclined(true)}

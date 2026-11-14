@@ -50,7 +50,7 @@ npm run build
 ## Note tecniche
 
 - Preferiti, configurazioni inviate e conversazioni non ancora spedite sono salvati in **localStorage** (nessun account utente). I dati personali del modulo non vengono salvati nel browser.
-- Moduli e conversazioni vengono inviati via email tramite FormSubmit all’indirizzo in `src/lib/site.ts` (richiede l’eventuale attivazione iniziale del destinatario da parte del servizio).
+- Moduli e conversazioni vengono inviati tramite Gmail SMTP al destinatario in `src/lib/site.ts`. Configura `GMAIL_APP_PASSWORD` su Vercel come segreto server; non inserirlo nel codice o nei file pubblici.
 - Auth/DB scaffold è presente ma **disattivato** (non serve per questo sito). Puoi rimuovere la cartella `src/lib/auth` e `migrations` in un secondo momento se vuoi un repo più leggero.
 - Script di produzione (distinta pannelli, foglio di lavoro) sono in un pacchetto separato (`production-tools.zip`).
 

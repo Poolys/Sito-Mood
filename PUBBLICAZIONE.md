@@ -6,7 +6,7 @@ Il sito è pensato per essere:
 3. Caricato su **GitHub**
 4. Pubblicato su **Vercel**
 
-Prima della pubblicazione, conferma che l’indirizzo in `src/lib/site.ts` sia quello definitivo e completa l’eventuale attivazione richiesta da FormSubmit.
+Prima della pubblicazione, conferma il destinatario in `src/lib/site.ts` e configura la variabile segreta `GMAIL_APP_PASSWORD` su Vercel per l’account `italiano05pooly@gmail.com`.
 
 ---
 
@@ -61,13 +61,13 @@ Il file `.gitignore` già esclude `.env`, `.vercel`, `node_modules`, ecc.
 
 ### Variabili d’ambiente (Environment Variables) su Vercel
 
-Attualmente **non sono obbligatorie**.  
-Aggiungile solo se/quando servono:
+La variabile `GMAIL_APP_PASSWORD` è necessaria per inviare le e-mail via Gmail SMTP.
+Configura la password come segreto nei deployment Production e Preview; non inserirla nel codice o in un file `.env`. Dopo averla salvata, crea un nuovo deployment.
 
 | Variabile | Quando serve | Note |
 |-----------|--------------|------|
 | `DATABASE_URL` | Solo se attivi Neon / Postgres | Lascia vuoto → usa PGLite locale (non persistente su Vercel) |
-| Altre chiavi email/API | Se cambi da formsubmit.co a Resend / SendGrid / etc. | Vedi sotto |
+| `GMAIL_APP_PASSWORD` | Invio e-mail da Gmail SMTP | Segreto server per `italiano05pooly@gmail.com`; non usare prefisso `VITE_` |
 
 ---
 
@@ -76,16 +76,14 @@ Aggiungile solo se/quando servono:
 ### Email
 
 - L’indirizzo unico di ricezione è configurato in `src/lib/site.ts` e viene usato sia nel sito sia negli invii server.
-- Il modulo e il concierge inviano i dati tramite FormSubmit; verifica l’eventuale email di attivazione del destinatario e fai una prova reale dopo il deploy.
+- Il modulo e il concierge inviano le e-mail tramite Gmail SMTP (`smtp.gmail.com`, porta 587), da `italiano05pooly@gmail.com` al destinatario configurato in `src/lib/site.ts`.
+- Dopo aver configurato `GMAIL_APP_PASSWORD` e pubblicato un nuovo deployment, prova sia la richiesta di contatto sia la chat. Se una prova fallisce, controlla i log runtime Vercel per il dettaglio SMTP.
 
 - **Footer contatto**:  
   File: `src/components/site-footer.tsx`  
   Stesso indirizzo email.
 
-Se in futuro vuoi usare un servizio professionale (Resend, SendGrid, Postmark…):
-1. Crea account e prendi l’API key.
-2. Aggiungi la variabile su Vercel (es. `RESEND_API_KEY`).
-3. Modifica `concierge-mail.server.ts` per usare quel servizio.
+Gmail richiede una password per le app se la verifica in due passaggi è attiva. L’applicazione la legge esclusivamente dal segreto `GMAIL_APP_PASSWORD` lato server.
 
 ### Dominio personalizzato
 

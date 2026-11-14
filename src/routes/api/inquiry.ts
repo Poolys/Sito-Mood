@@ -39,8 +39,18 @@ export const Route = createFileRoute("/api/inquiry")({
         try {
           const { deliverInquiry } = await import("@/lib/concierge-mail.server");
           const result = await deliverInquiry(inquiry);
+          if (!result.ok) {
+            console.error("[api/inquiry] Gmail SMTP rejected delivery", {
+              status: result.status,
+              detail: result.detail,
+            });
+          }
           return Response.json({ ok: result.ok }, { status: result.ok ? 200 : 502 });
-        } catch {
+        } catch (error) {
+          console.error("[api/inquiry] Gmail SMTP request failed", {
+            name: error instanceof Error ? error.name : "UnknownError",
+            message: error instanceof Error ? error.message : String(error),
+          });
           return Response.json({ ok: false }, { status: 502 });
         }
       },

@@ -25,11 +25,11 @@ const copy: Record<Lang, {
     title: "Prima di entrare",
     subtitle: "Per continuare, leggi i Termini e conferma di accettarli.",
     chatTitle: "Assistente AI: come viene usata la chat",
-    chatNotice: "La chat è facoltativa. La direzione di Pooly's Mood visualizza i messaggi e li usa soltanto per rispondere alle informazioni richieste e valutare le esigenze di produzione, non per pubblicità. Per recapitare la conversazione all'atelier, il sito la invia anche a FormSubmit, un servizio tecnico esterno di consegna e-mail. Per ricordare la scelta, il sito salva un indicatore nel browser. Evita di inserire dati sensibili.",
+    chatNotice: "La chat è facoltativa. La direzione di Pooly's Mood visualizza i messaggi e li usa soltanto per rispondere alle informazioni richieste e valutare le esigenze di produzione, non per pubblicità. Per recapitare la conversazione all'atelier, il sito la invia tramite Gmail di Google. Per ricordare la scelta, il sito salva un indicatore nel browser. Evita di inserire dati sensibili.",
     optional: "Puoi visitare il sito senza usare la chat.",
     readTerms: "Leggi i Termini e le informazioni complete",
-    providerNote: "FormSubmit riceve i contenuti per il solo invio tecnico dell'e-mail. Consulta la sua informativa:",
-    providerLink: "Informativa privacy FormSubmit",
+    providerNote: "Google tratta i dati necessari alla consegna dell'e-mail secondo la propria informativa sulla privacy:",
+    providerLink: "Informativa privacy Google",
     checkbox: "Ho letto e accetto i Termini e condizioni.",
     decline: "Declino",
     accept: "Accetto ed entro",
@@ -40,11 +40,11 @@ const copy: Record<Lang, {
     title: "Before you enter",
     subtitle: "To continue, read the Terms and confirm that you accept them.",
     chatTitle: "AI assistant: how the chat is used",
-    chatNotice: "The chat is optional. Pooly's Mood management can view messages and uses them only to answer the information requested and assess production needs, not for advertising. To deliver the conversation to the atelier, the site also sends it to FormSubmit, an external email delivery service. The site stores an acceptance marker in your browser to remember your choice. Do not enter sensitive data.",
+    chatNotice: "The chat is optional. Pooly's Mood management can view messages and uses them only to answer the information requested and assess production needs, not for advertising. To deliver the conversation to the atelier, the site sends it through Google Gmail. The site stores an acceptance marker in your browser to remember your choice. Do not enter sensitive data.",
     optional: "You can browse the site without using the chat.",
     readTerms: "Read the Terms and full information",
-    providerNote: "FormSubmit receives the content to deliver the email. Read its privacy notice:",
-    providerLink: "FormSubmit privacy notice",
+    providerNote: "Google processes the data needed to deliver the email under its privacy policy:",
+    providerLink: "Google Privacy Policy",
     checkbox: "I have read and accept the Terms and conditions.",
     decline: "Decline",
     accept: "Accept and enter",
@@ -55,11 +55,11 @@ const copy: Record<Lang, {
     title: "Bevor Sie eintreten",
     subtitle: "Lesen Sie zum Fortfahren die Bedingungen und bestätigen Sie Ihre Zustimmung.",
     chatTitle: "KI-Assistent: Verwendung des Chats",
-    chatNotice: "Der Chat ist freiwillig. Die Leitung von Pooly's Mood kann die Nachrichten einsehen und verwendet sie ausschließlich, um die erbetenen Informationen zu beantworten und Produktionswünsche zu prüfen, nicht für Werbung. Zur Zustellung an das Atelier übermittelt die Website die Unterhaltung auch an FormSubmit, einen externen E-Mail-Zustelldienst. Die Website speichert Ihre Zustimmung im Browser. Geben Sie keine sensiblen Daten ein.",
+    chatNotice: "Der Chat ist freiwillig. Die Leitung von Pooly's Mood kann die Nachrichten einsehen und verwendet sie ausschließlich, um die erbetenen Informationen zu beantworten und Produktionswünsche zu prüfen, nicht für Werbung. Zur Zustellung an das Atelier sendet die Website die Unterhaltung über Google Gmail. Die Website speichert Ihre Zustimmung im Browser. Geben Sie keine sensiblen Daten ein.",
     optional: "Sie können die Website ohne Nutzung des Chats besuchen.",
     readTerms: "Bedingungen und vollständige Informationen lesen",
-    providerNote: "FormSubmit erhält die Inhalte zur technischen Zustellung der E-Mail. Lesen Sie die Datenschutzhinweise:",
-    providerLink: "Datenschutzhinweise von FormSubmit",
+    providerNote: "Google verarbeitet die für die E-Mail-Zustellung erforderlichen Daten gemäß seiner Datenschutzerklärung:",
+    providerLink: "Google-Datenschutzerklärung",
     checkbox: "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie.",
     decline: "Ablehnen",
     accept: "Akzeptieren und eintreten",
@@ -123,7 +123,7 @@ export function TermsGate({
               {t.providerNote}{" "}
               <a
                 className="text-accent underline underline-offset-4 hover:text-fg"
-                href="https://formsubmit.co/privacy.pdf"
+                href="https://policies.google.com/privacy"
                 target="_blank"
                 rel="noreferrer"
               >

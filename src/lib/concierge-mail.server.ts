@@ -1,8 +1,8 @@
-import https from "node:https";
+import nodemailer from "nodemailer";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 const TO = CONTACT_EMAIL;
-const SITE_URL = "https://www.poolysmood.com/";
+const FROM = "italiano05pooly@gmail.com";
 
 export type TranscriptMessage = {
   role: "visitor" | "atelier";
@@ -27,50 +27,36 @@ export type InquiryEmail = {
   notes: string;
 };
 
-function postJson(url: string, body: unknown) {
-  const data = JSON.stringify(body);
-  const target = new URL(url);
-  return new Promise<{ status: number; text: string }>((resolve, reject) => {
-    const req = https.request(
-      {
-        hostname: target.hostname,
-        path: `${target.pathname}${target.search}`,
-        method: "POST",
-        family: 4,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Content-Length": Buffer.byteLength(data),
-          Origin: new URL(SITE_URL).origin,
-          Referer: SITE_URL,
-        },
-        timeout: 8000,
-      },
-      (res) => {
-        const chunks: Buffer[] = [];
-        res.on("data", (chunk) => chunks.push(chunk as Buffer));
-        res.on("end", () => {
-          resolve({
-            status: res.statusCode ?? 0,
-            text: Buffer.concat(chunks).toString("utf8"),
-          });
-        });
-      },
-    );
-    req.on("timeout", () => req.destroy(new Error("timeout")));
-    req.on("error", reject);
-    req.end(data);
+function createTransport() {
+  const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
+  if (!pass) throw new Error("GMAIL_APP_PASSWORD is not configured");
+
+  return nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: { user: FROM, pass },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
   });
 }
 
-function providerAccepted(result: { status: number; text: string }) {
-  if (result.status < 200 || result.status >= 300) return false;
-  try {
-    const body = JSON.parse(result.text) as { success?: unknown };
-    return body.success === true || body.success === "true";
-  } catch {
-    return false;
-  }
+async function sendEmail(subject: string, text: string, replyTo?: string) {
+  const transport = createTransport();
+  const options: { from: string; to: string; subject: string; text: string; replyTo?: string } = {
+    from: `Pooly's Mood <${FROM}>`,
+    to: TO,
+    subject,
+    text,
+  };
+  if (replyTo) options.replyTo = replyTo;
+  await transport.sendMail(options);
+}
+
+function errorDetail(error: unknown) {
+  return error instanceof Error ? error.message.slice(0, 400) : "Unknown email delivery error";
 }
 
 export async function deliverConversation(input: {
@@ -84,37 +70,37 @@ export async function deliverConversation(input: {
     })
     .join("\n\n");
   const messaggio = `Lingua: ${input.lang}\n\n${lines}`.slice(0, 12000);
-  const result = await postJson(`https://formsubmit.co/ajax/${TO}`, {
-    _url: SITE_URL,
-    _subject: "Conversazione espositori — Pooly's Mood",
-    _template: "box",
-    _captcha: "false",
-    nome: "Visitatore del sito",
-    messaggio,
-  });
-  return { ok: providerAccepted(result), status: result.status, detail: result.text.slice(0, 400) };
+  try {
+    await sendEmail("Conversazione espositori — Pooly's Mood", messaggio);
+    return { ok: true, status: 200, detail: "Gmail SMTP accepted the message" };
+  } catch (error) {
+    return { ok: false, status: 502, detail: errorDetail(error) };
+  }
 }
 
 export async function deliverInquiry(input: InquiryEmail) {
-  const result = await postJson(`https://formsubmit.co/ajax/${TO}`, {
-    _url: SITE_URL,
-    _subject: `Richiesta ${input.model || "Pooly's Mood"}`,
-    _template: "box",
-    _captcha: "false",
-    _replyto: input.email,
-    nome: `${input.name} ${input.surname}`.trim(),
-    email: input.email,
-    telefono: input.phone,
-    ruolo: input.role,
-    azienda: input.company,
-    modello: input.model,
-    legno: input.wood,
-    acciaio: input.steel,
-    altezza_cm: input.height,
-    larghezza_cm: input.width,
-    profondita_cm: input.depth,
-    bottiglie: input.bottles,
-    messaggio: input.notes,
-  });
-  return { ok: providerAccepted(result), status: result.status };
+  const messaggio = [
+    `Nome: ${input.name} ${input.surname}`.trim(),
+    `E-mail: ${input.email}`,
+    `Telefono: ${input.phone}`,
+    `Ruolo: ${input.role}`,
+    `Azienda: ${input.company}`,
+    `Modello: ${input.model}`,
+    `Legno: ${input.wood}`,
+    `Acciaio: ${input.steel}`,
+    `Altezza: ${input.height} cm`,
+    `Larghezza: ${input.width} cm`,
+    `Profondità: ${input.depth} cm`,
+    `Bottiglie: ${input.bottles}`,
+    "",
+    "Richiesta:",
+    input.notes,
+  ].join("\n");
+
+  try {
+    await sendEmail(`Richiesta ${input.model || "Pooly's Mood"}`, messaggio, input.email);
+    return { ok: true, status: 200 };
+  } catch (error) {
+    return { ok: false, status: 502, detail: errorDetail(error) };
+  }
 }

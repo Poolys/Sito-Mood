@@ -133,6 +133,8 @@ export function TermsGate({
 
             <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-bg/50 p-4 text-sm leading-relaxed text-fg">
               <input
+                id="terms-accepted"
+                name="termsAccepted"
                 type="checkbox"
                 checked={checked}
                 onChange={(event) => {

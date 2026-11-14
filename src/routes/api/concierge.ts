@@ -41,11 +41,15 @@ export const Route = createFileRoute("/api/concierge")({
           if (!result.ok) {
             console.error("[api/concierge] email provider rejected delivery", {
               status: result.status,
+              detail: result.detail,
             });
           }
           return Response.json({ ok: result.ok }, { status: result.ok ? 200 : 502 });
         } catch (error) {
-          console.error("[api/concierge] email delivery failed", error);
+          console.error("[api/concierge] email delivery failed", {
+            name: error instanceof Error ? error.name : "UnknownError",
+            message: error instanceof Error ? error.message : String(error),
+          });
           return Response.json({ ok: false }, { status: 502 });
         }
       },

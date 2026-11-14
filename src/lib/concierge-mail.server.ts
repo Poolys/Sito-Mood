@@ -2,6 +2,7 @@ import https from "node:https";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 const TO = CONTACT_EMAIL;
+const SITE_URL = "https://www.poolysmood.com/";
 
 export type TranscriptMessage = {
   role: "visitor" | "atelier";
@@ -40,6 +41,8 @@ function postJson(url: string, body: unknown) {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Content-Length": Buffer.byteLength(data),
+          Origin: new URL(SITE_URL).origin,
+          Referer: SITE_URL,
         },
         timeout: 8000,
       },
@@ -64,9 +67,9 @@ function providerAccepted(result: { status: number; text: string }) {
   if (result.status < 200 || result.status >= 300) return false;
   try {
     const body = JSON.parse(result.text) as { success?: unknown };
-    return body.success !== false && body.success !== "false";
+    return body.success === true || body.success === "true";
   } catch {
-    return true;
+    return false;
   }
 }
 
@@ -82,6 +85,7 @@ export async function deliverConversation(input: {
     .join("\n\n");
   const messaggio = `Lingua: ${input.lang}\n\n${lines}`.slice(0, 12000);
   const result = await postJson(`https://formsubmit.co/ajax/${TO}`, {
+    _url: SITE_URL,
     _subject: "Conversazione espositori — Pooly's Mood",
     _template: "box",
     _captcha: "false",
@@ -93,6 +97,7 @@ export async function deliverConversation(input: {
 
 export async function deliverInquiry(input: InquiryEmail) {
   const result = await postJson(`https://formsubmit.co/ajax/${TO}`, {
+    _url: SITE_URL,
     _subject: `Richiesta ${input.model || "Pooly's Mood"}`,
     _template: "box",
     _captcha: "false",

@@ -346,6 +346,8 @@ export function Concierge() {
               }}
             >
               <input
+                id="concierge-message"
+                name="message"
                 ref={inputRef}
                 value={draft}
                 onChange={(event) => setDraft(event.target.value)}
@@ -353,7 +355,7 @@ export function Concierge() {
                 aria-label={t.placeholder}
                 className="h-11 min-w-0 flex-1 rounded-full border border-border bg-surface px-4 text-sm text-fg outline-none placeholder:text-subtle focus:border-accent"
                 maxLength={800}
-              disabled={!ready || sendingConversation}
+                disabled={!ready || sendingConversation}
               />
               <button
                 type="submit"

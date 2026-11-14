@@ -196,8 +196,9 @@ function SliderRow({
   unit?: string;
   onChange: (n: number) => void;
 }) {
+  const fieldId = label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   return (
-    <label className="grid gap-2">
+    <label className="grid gap-2" htmlFor={fieldId}>
       <span className="flex items-baseline justify-between text-sm">
         <span className="text-muted">{label}</span>
         <span className="tabular-nums text-fg">
@@ -206,6 +207,8 @@ function SliderRow({
         </span>
       </span>
       <input
+        id={fieldId}
+        name={fieldId}
         type="range"
         min={min}
         max={max}

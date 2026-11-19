@@ -36,7 +36,7 @@ type StoredMessage = {
   at: string;
 };
 
-type KeyboardLayout = { bottom: number; panelHeight: number };
+type KeyboardLayout = { top: number; height: number };
 
 function readStored(): StoredMessage[] {
   try {
@@ -110,10 +110,7 @@ export function Concierge() {
         active instanceof HTMLElement &&
         (active.isContentEditable || ["INPUT", "TEXTAREA"].includes(active.tagName));
       const touchLayout = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
-      const obscuredHeight = Math.max(
-        0,
-        document.documentElement.clientHeight - viewport.height - viewport.offsetTop,
-      );
+      const obscuredHeight = Math.max(0, document.documentElement.clientHeight - viewport.height - viewport.offsetTop);
       const keyboardVisible =
         touchLayout &&
         editing &&
@@ -124,14 +121,11 @@ export function Concierge() {
         return;
       }
 
-      const next = {
-        bottom: (obscuredHeight > 80 ? obscuredHeight : 0) + 8,
-        panelHeight: Math.max(180, Math.min(512, viewport.height - 84)),
-      };
+      const next = { top: viewport.offsetTop, height: viewport.height };
       setKeyboardLayout((current) =>
         current &&
-        Math.abs(current.bottom - next.bottom) < 1 &&
-        Math.abs(current.panelHeight - next.panelHeight) < 1
+        Math.abs(current.top - next.top) < 1 &&
+        Math.abs(current.height - next.height) < 1
           ? current
           : next,
       );
@@ -153,6 +147,15 @@ export function Concierge() {
       document.removeEventListener("focusout", onFocusOut);
     };
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   useEffect(() => {
     const stored = readStored();
@@ -281,17 +284,18 @@ export function Concierge() {
         />
       ) : null}
       <div
-        className="fixed right-4 bottom-[5.25rem] z-[70] flex flex-col items-end gap-3 md:bottom-6 print:hidden"
-        style={keyboardLayout ? { bottom: `${keyboardLayout.bottom}px` } : undefined}
+        className={open
+          ? "fixed inset-0 z-[70] flex flex-col items-stretch print:hidden md:inset-auto md:right-4 md:bottom-6 md:items-end md:gap-3"
+          : "fixed right-4 bottom-[5.25rem] z-[70] flex flex-col items-end gap-3 print:hidden md:bottom-6"}
+        style={open && keyboardLayout ? { top: `${keyboardLayout.top}px`, bottom: "auto", height: `${keyboardLayout.height}px` } : undefined}
       >
         {open ? (
           <section
             role="dialog"
             aria-label={t.title}
-            className="flex h-[min(32rem,calc(100dvh-9rem))] w-[min(22.5rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-bg shadow-[0_18px_50px_rgba(0,0,0,0.45)]"
-            style={keyboardLayout ? { height: `${keyboardLayout.panelHeight}px` } : undefined}
+            className="flex h-full w-full min-h-0 flex-col overflow-hidden border-0 border-border bg-bg shadow-none md:h-[min(32rem,calc(100dvh-9rem))] md:w-[min(22.5rem,calc(100vw-2rem))] md:rounded-2xl md:border md:shadow-[0_18px_50px_rgba(0,0,0,0.45)]"
           >
-            <header className="flex items-center gap-3 border-b border-border bg-surface px-4 py-3">
+            <header className="flex shrink-0 items-center gap-3 border-b border-border bg-surface px-4 pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] md:py-3">
               <span className="flex size-9 items-center justify-center rounded-full bg-accent text-accent-fg">
                 <MessageCircle className="size-4" />
               </span>
@@ -310,7 +314,7 @@ export function Concierge() {
                 <X className="size-4" />
               </button>
             </header>
-            <div ref={listRef} className="flex flex-1 flex-col gap-2 overflow-y-auto bg-surface-2/40 px-3 py-3">
+            <div ref={listRef} className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain bg-surface-2/40 px-3 py-3">
               {shown.map((message, index) => (
                 <p
                   key={`${message.at}-${index}`}
@@ -341,7 +345,7 @@ export function Concierge() {
               </div>
             ) : null}
             <form
-              className="flex items-center gap-2 px-3 pt-2 pb-3"
+              className="flex shrink-0 items-center gap-2 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-2 md:pb-3"
               onSubmit={(event) => {
                 event.preventDefault();
                 send();

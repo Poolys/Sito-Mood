@@ -54,6 +54,7 @@ export function TermsGate({
   onAccept: () => void;
 }) {
   const lang = useMood((state) => state.lang) as Lang;
+  const setLang = useMood((state) => state.setLang);
   const t = copy[lang] ?? copy.it;
   const site = ui[lang] ?? ui.it;
   const [checked, setChecked] = useState(false);
@@ -71,6 +72,24 @@ export function TermsGate({
         className="w-full max-w-md rounded-2xl border border-accent/50 bg-surface px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.65)] sm:px-8 sm:py-8"
       >
         <header className="text-center">
+          <div className="mb-4 flex justify-center gap-1" aria-label="Language">
+            {(["it", "en", "de"] as const).map((code) => (
+              <button
+                key={code}
+                type="button"
+                onClick={() => setLang(code)}
+                aria-pressed={lang === code}
+                aria-label={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
+                className={`min-h-9 min-w-10 rounded-full px-3 text-xs uppercase tracking-[0.14em] transition ${
+                  lang === code
+                    ? "border border-accent/60 bg-accent/10 text-accent"
+                    : "border border-transparent text-muted hover:border-border hover:text-fg"
+                }`}
+              >
+                {code}
+              </button>
+            ))}
+          </div>
           <img
             src="/favicon.svg"
             alt=""

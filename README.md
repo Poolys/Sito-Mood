@@ -17,7 +17,7 @@ Pensato per cantine, enoteche e hospitality di lusso.
 - Licensing / Termini
 - Preferiti e Richieste (localStorage)
 
-Lingue: **Italiano**, **English**, **Deutsch**.
+Lingue: **Italiano**, **English**, **Deutsch**, **Français**.
 
 ## Stack
 

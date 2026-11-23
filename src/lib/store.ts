@@ -8,10 +8,11 @@ const INQ_KEY = "pm-inquiries";
 function readLang(): Lang {
   if (typeof window === "undefined") return "it";
   const v = window.localStorage.getItem(LANG_KEY);
-  if (v === "it" || v === "en" || v === "de") return v;
+  if (v === "it" || v === "en" || v === "de" || v === "fr") return v;
   const nav = window.navigator.language.toLowerCase();
   if (nav.startsWith("de")) return "de";
   if (nav.startsWith("en")) return "en";
+  if (nav.startsWith("fr")) return "fr";
   return "it";
 }
 

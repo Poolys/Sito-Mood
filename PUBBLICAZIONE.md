@@ -105,7 +105,7 @@ Su Vercel → Project → Settings → Domains → aggiungi `www.poolysmood.com`
 
 1. Controlla tutte le pagine (Home, Catalogo, dettaglio prodotto, Personalizza, Contatto, Preferiti, Richieste).
 2. Prova il form di contatto e invia esplicitamente una conversazione dal Concierge; controlla l’arrivo dei messaggi alla casella configurata.
-3. Verifica le 3 lingue (IT / EN / DE).
+3. Verifica le 4 lingue (IT / EN / DE / FR).
 4. Controlla su mobile.
 
 ---

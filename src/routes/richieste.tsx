@@ -49,11 +49,14 @@ function Richieste() {
                         .join(" · ")}
                     </p>
                     <p className="mt-2 text-[0.6875rem] uppercase tracking-[0.14em] text-subtle">
-                      {when.toLocaleDateString(lang === "de" ? "de" : lang === "en" ? "en" : "it", {
+                      {when.toLocaleDateString(
+                        lang === "de" ? "de-DE" : lang === "en" ? "en-GB" : lang === "fr" ? "fr-FR" : "it-IT",
+                        {
                         day: "numeric",
                         month: "short",
                         year: "numeric",
-                      })}
+                        },
+                      )}
                     </p>
                   </div>
                   <button

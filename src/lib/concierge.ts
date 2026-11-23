@@ -1,6 +1,7 @@
 import knowledge from "./espositori.json" with { type: "json" };
+import type { Lang } from "./catalog";
 
-export type Lang = "it" | "en" | "de";
+export type { Lang };
 
 type L10n = Record<Lang, string>;
 
@@ -77,6 +78,23 @@ const copy = {
     measures: "Maße",
     family: "Familie",
   },
+  fr: {
+    greet:
+      "Je suis l’atelier. Je réponds uniquement sur les présentoirs : dimensions, matériaux et capacité. Demandez-moi un modèle.",
+    refuse:
+      "Je peux uniquement vous renseigner sur les présentoirs de la collection, par exemple P Gaudium, Art Wall, Wall Bar ou Porta Gaudium de Vino.",
+    noPrice: "La fiche ne mentionne aucun prix. ",
+    list: "La collection comprend :",
+    woods: "Les bois indiqués sont",
+    steels: "Les aciers indiqués sont",
+    made: "Sur mesure",
+    width: "largeur",
+    height: "hauteur",
+    depth: "profondeur",
+    capacity: "Capacité",
+    measures: "Dimensions",
+    family: "Famille",
+  },
 } as const;
 
 function fold(value: string) {
@@ -93,12 +111,14 @@ function languageOf(question: string, fallback: Lang): Lang {
   if (/^(ciao|salve|buongiorno|buonasera|buondi)$/.test(greeting)) return "it";
   if (/^(hello|hi|hey)$/.test(greeting)) return "en";
   if (/^(hallo|guten tag|servus)$/.test(greeting)) return "de";
+  if (/^(bonjour|salut|bonsoir)$/.test(greeting)) return "fr";
   if (greeting.length < 5) return fallback;
 
   const clues: Record<Lang, string[]> = {
     it: [" il ", " lo ", " la ", " gli ", " che ", " come ", " quanto ", " quale ", " quali ", " avete ", " vorrei ", " grazie ", " dimensioni ", " misura ", " altezza ", " larghezza ", " profondita ", " capienza ", " materiale ", " legno ", " acciaio "],
     en: [" the ", " is ", " are ", " what ", " how ", " which ", " do you ", " can you ", " please ", " thanks ", " size ", " height ", " width ", " depth ", " capacity ", " dimensions ", " material ", " made ", " wood ", " steel "],
     de: [" der ", " die ", " das ", " ist ", " sind ", " was ", " wie ", " welche ", " haben ", " konnen ", " bitte ", " danke ", " grosse ", " hohe ", " breite ", " tiefe ", " kapazitat ", " masse ", " material ", " holz ", " stahl "],
+    fr: [" le ", " la ", " les ", " est ", " sont ", " comment ", " quelles ", " avez-vous ", " pouvez-vous ", " merci ", " dimensions ", " hauteur ", " largeur ", " profondeur ", " capacite ", " mesure ", " materiau ", " bois ", " acier "],
   };
   const scores = (Object.keys(clues) as Lang[])
     .map((language) => ({
@@ -111,36 +131,36 @@ function languageOf(question: string, fallback: Lang): Lang {
     : fallback;
 }
 function isGreeting(q: string) {
-  return /^(ciao|salve|buongiorno|buonasera|buondi|hey|hello|hi|hallo|guten tag|servus|bonjour)\b/.test(q);
+  return /^(ciao|salve|buongiorno|buonasera|buondi|hey|hello|hi|hallo|guten tag|servus|bonjour|salut|bonsoir)\b/.test(q);
 }
 
 function isList(q: string) {
-  return /(espositor|catalogo|collezion|modelli|quali pezzi|quali avete|che pezzi|what do you have|which (models|pieces)|collection|aussteller|kollektion|welche modelle)/.test(
+  return /(espositor|catalogo|collezion|modelli|quali pezzi|quali avete|che pezzi|what do you have|which (models|pieces)|collection|aussteller|kollektion|welche modelle|presentoir|catalogue|quels modeles)/.test(
     q,
   );
 }
 
 function asksPrice(q: string) {
-  return /(prezz|costa|costo|quanto costa|price|euro|\b€\b|kaufpreis)/.test(q);
+  return /(prezz|costa|costo|quanto costa|price|euro|\b€\b|kaufpreis|prix|coute)/.test(q);
 }
 
 function asksWoods(q: string) {
-  return /(legni|legno|rovere|noce|castagno|ciliegio|oak|walnut|chestnut|cherry|holz|eiche|nuss)/.test(q);
+  return /(legni|legno|rovere|noce|castagno|ciliegio|oak|walnut|chestnut|cherry|holz|eiche|nuss|bois|chene|noyer|chataignier|cerisier)/.test(q);
 }
 
 function asksSteels(q: string) {
-  return /(inox|acciaio|acciai|satinato|specchio|nero opaco|stainless|edelstahl|stahl)/.test(q);
+  return /(inox|acciaio|acciai|satinato|specchio|nero opaco|stainless|edelstahl|stahl|acier|inoxydable|brosse|miroir)/.test(q);
 }
 
 type Focus = "altezza" | "larghezza" | "profondita" | "capienza" | "materiali" | "misure" | "tutto";
 
 function focusOf(q: string): Focus {
-  if (/(altezz|quanto e alto|\balto\b|height|how tall|hoch|hoehe)/.test(q)) return "altezza";
-  if (/(larghezz|\blargo\b|width|breit)/.test(q)) return "larghezza";
-  if (/(profond|depth|spessore di|tief)/.test(q)) return "profondita";
-  if (/(capienz|bottigl|quante|capacity|flaschen|how many)/.test(q)) return "capienza";
-  if (/(material|scheda|dettagli|legno|inox|acciaio|led|vetro|wood|steel|holz)/.test(q)) return "materiali";
-  if (/(misur|dimension|formato|size|masse|grosse)/.test(q)) return "misure";
+  if (/(altezz|quanto e alto|\balto\b|height|how tall|hoch|hoehe|hauteur)/.test(q)) return "altezza";
+  if (/(larghezz|\blargo\b|width|breit|largeur)/.test(q)) return "larghezza";
+  if (/(profond|depth|spessore di|tief|profondeur)/.test(q)) return "profondita";
+  if (/(capienz|bottigl|quante|capacity|flaschen|how many|capacite|bouteilles|combien)/.test(q)) return "capienza";
+  if (/(material|scheda|dettagli|legno|inox|acciaio|led|vetro|wood|steel|holz|bois|verre)/.test(q)) return "materiali";
+  if (/(misur|dimension|formato|size|masse|grosse|mesure|taille)/.test(q)) return "misure";
   return "tutto";
 }
 
@@ -296,5 +316,17 @@ export const conciergeCopy = {
     open: "Display-Chat öffnen",
     prompt: "Kann ich helfen?",
     conversationFailed: "Senden fehlgeschlagen. Das Gespräch ist weiterhin hier gespeichert.",
+  },
+  fr: {
+    title: "Atelier",
+    sub: "Présentoirs uniquement",
+    placeholder: "Posez une question sur un présentoir",
+    send: "Envoyer",
+    close: "Fermer",
+    retry: "Réessayer l’envoi",
+    sending: "Envoi de la conversation…",
+    open: "Ouvrir le chat des présentoirs",
+    prompt: "Puis-je vous aider ?",
+    conversationFailed: "Échec de l’envoi. La conversation est toujours enregistrée ici.",
   },
 } as const;

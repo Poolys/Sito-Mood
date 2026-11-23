@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { LANGUAGES, languageNames } from "@/lib/catalog";
 import { ui } from "@/lib/i18n";
 import { useMood } from "@/lib/store";
 import { cn } from "@/lib/utils";
@@ -85,8 +86,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-0.5 text-[0.6875rem] tracking-[0.14em] text-muted">
-            {(["it", "en", "de"] as const).map((code) => (
+          <div className="hidden items-center gap-0.5 text-[0.6875rem] tracking-[0.14em] text-muted lg:flex">
+            {LANGUAGES.map((code) => (
               <button
                 key={code}
                 type="button"
@@ -96,8 +97,8 @@ export function SiteHeader() {
                   lang === code ? "text-accent" : "hover:text-fg",
                 )}
                 aria-pressed={lang === code}
-                aria-label={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
-                title={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
+                aria-label={languageNames[code]}
+                title={languageNames[code]}
               >
                 {code}
               </button>
@@ -135,6 +136,27 @@ export function SiteHeader() {
             >
               {t.nav.requests}
             </Link>
+            <div className="mt-5 border-t border-border pt-4">
+              <p className="mb-2 text-xs uppercase tracking-[0.18em] text-muted">{t.language}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {LANGUAGES.map((code) => (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => setLang(code)}
+                    aria-pressed={lang === code}
+                    className={cn(
+                      "min-h-11 rounded-full border px-3 text-sm transition-colors",
+                      lang === code
+                        ? "border-accent/60 bg-accent/10 text-accent"
+                        : "border-border text-muted hover:text-fg",
+                    )}
+                  >
+                    {languageNames[code]}
+                  </button>
+                ))}
+              </div>
+            </div>
           </nav>
         </div>
       ) : null}

@@ -1,4 +1,11 @@
-export type Lang = "it" | "en" | "de";
+export type Lang = "it" | "en" | "de" | "fr";
+export const LANGUAGES: Lang[] = ["it", "en", "de", "fr"];
+export const languageNames: Record<Lang, string> = {
+  it: "Italiano",
+  en: "English",
+  de: "Deutsch",
+  fr: "Français",
+};
 export type Localized = Record<Lang, string>;
 export type LocalizedList = Record<Lang, string[]>;
 export type Category = "parete" | "terra" | "servizio" | "allestimenti" | "soglia";
@@ -29,25 +36,25 @@ export type Project = {
 };
 
 export const woods = [
-  { id: "oak", label: { it: "Rovere massello del Piemonte", en: "Solid Piedmont oak", de: "Massive piemontesische Eiche" } },
-  { id: "walnut", label: { it: "Noce italiano", en: "Italian walnut", de: "Italienischer Nussbaum" } },
-  { id: "chestnut", label: { it: "Castagno antico", en: "Ancient chestnut", de: "Altes Kastanienholz" } },
-  { id: "cherry", label: { it: "Ciliegio selezionato", en: "Selected cherry", de: "Ausgewählte Kirsche" } },
+  { id: "oak", label: { it: "Rovere massello del Piemonte", en: "Solid Piedmont oak", de: "Massive piemontesische Eiche", fr: "Chêne massif du Piémont" } },
+  { id: "walnut", label: { it: "Noce italiano", en: "Italian walnut", de: "Italienischer Nussbaum", fr: "Noyer italien" } },
+  { id: "chestnut", label: { it: "Castagno antico", en: "Ancient chestnut", de: "Altes Kastanienholz", fr: "Châtaignier ancien" } },
+  { id: "cherry", label: { it: "Ciliegio selezionato", en: "Selected cherry", de: "Ausgewählte Kirsche", fr: "Cerisier sélectionné" } },
 ] as const;
 
 export const steels = [
-  { id: "mirror", label: { it: "Inox specchio", en: "Mirror stainless steel", de: "Spiegel-Edelstahl" } },
-  { id: "brushed", label: { it: "Inox satinato", en: "Brushed stainless steel", de: "Gebürsteter Edelstahl" } },
-  { id: "black", label: { it: "Inox nero opaco", en: "Matte black stainless steel", de: "Mattschwarzer Edelstahl" } },
+  { id: "mirror", label: { it: "Inox specchio", en: "Mirror stainless steel", de: "Spiegel-Edelstahl", fr: "Inox miroir" } },
+  { id: "brushed", label: { it: "Inox satinato", en: "Brushed stainless steel", de: "Gebürsteter Edelstahl", fr: "Inox brossé" } },
+  { id: "black", label: { it: "Inox nero opaco", en: "Matte black stainless steel", de: "Mattschwarzer Edelstahl", fr: "Inox noir mat" } },
 ] as const;
 
 export const categories: { id: Category | "all"; label: Localized }[] = [
-  { id: "all", label: { it: "Tutti", en: "All", de: "Alle" } },
-  { id: "terra", label: { it: "A terra", en: "Freestanding", de: "Standmodelle" } },
-  { id: "parete", label: { it: "A parete", en: "Wall", de: "Wand" } },
-  { id: "servizio", label: { it: "Servizio", en: "Service", de: "Service" } },
-  { id: "allestimenti", label: { it: "Allestimenti", en: "Installations", de: "Installationen" } },
-  { id: "soglia", label: { it: "Soglie", en: "Thresholds", de: "Schwellen" } },
+  { id: "all", label: { it: "Tutti", en: "All", de: "Alle", fr: "Tous" } },
+  { id: "terra", label: { it: "A terra", en: "Freestanding", de: "Standmodelle", fr: "À poser" } },
+  { id: "parete", label: { it: "A parete", en: "Wall", de: "Wand", fr: "Mural" } },
+  { id: "servizio", label: { it: "Servizio", en: "Service", de: "Service", fr: "Service" } },
+  { id: "allestimenti", label: { it: "Allestimenti", en: "Installations", de: "Installationen", fr: "Agencements" } },
+  { id: "soglia", label: { it: "Soglie", en: "Thresholds", de: "Schwellen", fr: "Seuils" } },
 ];
 
 export const products: Product[] = [
@@ -60,21 +67,24 @@ export const products: Product[] = [
     width: 600,
     height: 1400,
     depth: 320,
-    capacity: { it: "10 bottiglie orizzontali", en: "10 horizontal bottles", de: "10 liegende Flaschen" },
+    capacity: { it: "10 bottiglie orizzontali", en: "10 horizontal bottles", de: "10 liegende Flaschen", fr: "10 bouteilles à l’horizontale" },
     claim: {
       it: "Il tuo iniziale. Il nostro orgoglio.",
       en: "Your initial. Our pride.",
       de: "Dein Initial. Unser Stolz.",
+      fr: "Votre initiale. Notre fierté.",
     },
     intro: {
       it: "Un monogramma che custodisce il vino. Scultura funzionale, firma visibile.",
       en: "A monogram that holds the wine. Functional sculpture, a visible signature.",
       de: "Ein Monogramm, das den Wein bewahrt. Funktionsskulptur, sichtbare Signatur.",
+      fr: "Un monogramme qui garde le vin. Une sculpture fonctionnelle, une signature visible.",
     },
     story: {
       it: "La P è la nostra firma nello spazio. Un telaio inox oversize accoglie dieci bottiglie in posa orizzontale, sulla base in legno massello incisa Gaudium de Vino. Non è un portabottiglie: è un monogramma abitato.",
       en: "The P is our signature in space. An oversized stainless frame holds ten bottles on their side, on a solid wood base engraved Gaudium de Vino. Not a rack — a lived-in monogram.",
       de: "Das P ist unsere Signatur im Raum. Ein überdimensionierter Edelstahlrahmen nimmt zehn liegende Flaschen auf, auf einem massiven Holzsockel mit Gravur Gaudium de Vino.",
+      fr: "Le P est notre signature dans l’espace. Un grand cadre en inox accueille dix bouteilles couchées sur un socle en bois massif gravé Gaudium de Vino. Plus qu’un porte-bouteilles : un monogramme habité.",
     },
     specs: {
       it: [
@@ -98,6 +108,13 @@ export const products: Product[] = [
         "Höhe 1400 mm · Breite 600 mm",
         "Handgefertigt im Piemont",
       ],
+      fr: [
+        "Grand cadre en inox en forme de P",
+        "Socle en bois gravé Gaudium de Vino",
+        "10 emplacements pour bouteilles couchées",
+        "Hauteur 1400 mm · Largeur 600 mm",
+        "Fabrication artisanale dans le Piémont",
+      ],
     },
   },
   {
@@ -109,21 +126,24 @@ export const products: Product[] = [
     width: 400,
     height: 800,
     depth: 125,
-    capacity: { it: "5 bottiglie", en: "5 bottles", de: "5 Flaschen" },
+    capacity: { it: "5 bottiglie", en: "5 bottles", de: "5 Flaschen", fr: "5 bouteilles" },
     claim: {
       it: "Minimalismo verticale.",
       en: "Vertical minimalism.",
       de: "Vertikaler Minimalismus.",
+      fr: "Le minimalisme vertical.",
     },
     intro: {
       it: "Pochi centimetri, massima eleganza. Il vino diventa arte da parete.",
       en: "A few centimetres, maximum elegance. Wine becomes wall art.",
       de: "Wenige Zentimeter, maximale Eleganz. Wein wird zur Wandkunst.",
+      fr: "Quelques centimètres, une élégance maximale. Le vin devient un art mural.",
     },
     story: {
       it: "Cento millimetri di profondità. Cinque ripiani in legno naturale e un tubo inox Ø 42 mm: la cantina che non ruba la stanza, pensata per loft, suite e spazi raccolti.",
       en: "One hundred millimetres of depth. Five natural wood shelves and a Ø 42 mm stainless tube: a cellar that does not steal the room — for lofts, suites, compact spaces.",
       de: "Hundert Millimeter Tiefe. Fünf Naturholzregale und ein Edelstahlrohr Ø 42 mm: der Keller, der dem Raum nichts nimmt.",
+      fr: "Cent millimètres de profondeur. Cinq étagères en bois naturel et un tube en inox de Ø 42 mm : une cave qui ne prend pas de place, pensée pour les lofts, suites et espaces compacts.",
     },
     specs: {
       it: [
@@ -147,6 +167,13 @@ export const products: Product[] = [
         "5 Naturholzregale",
         "Edelstahlrohr Ø 42 mm",
       ],
+      fr: [
+        "Pièce unique à fixer au mur",
+        "Profondeur 120–130 mm",
+        "Largeur 400 mm · Hauteur 800 mm",
+        "5 étagères en bois naturel",
+        "Tube en inox Ø 42 mm",
+      ],
     },
   },
   {
@@ -157,21 +184,24 @@ export const products: Product[] = [
     width: 600,
     height: 1500,
     depth: 300,
-    capacity: { it: "In base ai ripiani", en: "According to shelves", de: "Je nach Regalböden" },
+    capacity: { it: "In base ai ripiani", en: "According to shelves", de: "Je nach Regalböden", fr: "Selon le nombre d’étagères" },
     claim: {
       it: "Eleganza curva, presenza silenziosa.",
       en: "Curved elegance, a quiet presence.",
       de: "Gebogene Eleganz, stille Präsenz.",
+      fr: "Élégance courbe, présence discrète.",
     },
     intro: {
       it: "Nella sua semplicità, introverso. Legno e acciaio in armonia.",
       en: "Simple, introverted. Wood and steel in harmony.",
       de: "Schlicht, introvertiert. Holz und Stahl in Harmonie.",
+      fr: "Simple et discrète. Le bois et l’acier en harmonie.",
     },
     story: {
       it: "Un arco in tubo inox lucido sostiene ripiani in legno massello. La curva è la firma: niente spigoli che alzano la voce, solo una presenza che tiene lo spazio.",
       en: "A polished stainless tube arch carries solid wood shelves. The curve is the signature: no edges that raise their voice, only a presence that holds the room.",
       de: "Ein polierter Edelstahlbogen trägt massive Holzregale. Die Kurve ist die Signatur: keine Kanten, die die Stimme heben.",
+      fr: "Une arche en tube inox poli soutient des étagères en bois massif. La courbe est sa signature : aucune arête tapageuse, juste une présence qui habite l’espace.",
     },
     specs: {
       it: [
@@ -195,6 +225,13 @@ export const products: Product[] = [
         "Kapazität je nach Anzahl der Böden",
         "Italienische Handfertigung",
       ],
+      fr: [
+        "Structure en tube inox poli",
+        "Étagères en bois massif naturel",
+        "Largeur 600 mm · Hauteur 1500 mm · Profondeur 300 mm",
+        "Capacité selon le nombre d’étagères",
+        "Fabrication artisanale italienne",
+      ],
     },
   },
   {
@@ -205,21 +242,24 @@ export const products: Product[] = [
     width: 800,
     height: 1000,
     depth: 360,
-    capacity: { it: "Magnum e grandi formati", en: "Magnum and large formats", de: "Magnum und Großformate" },
+    capacity: { it: "Magnum e grandi formati", en: "Magnum and large formats", de: "Magnum und Großformate", fr: "Magnums et grands formats" },
     claim: {
       it: "Il sostegno per le grandi etichette.",
       en: "Support for your grand labels.",
       de: "Halt für die großen Etiketten.",
+      fr: "Un écrin pour les grandes étiquettes.",
     },
     intro: {
       it: "Pensato per le Magnum e per le bottiglie che chiedono spazio, senza chiedere scusa.",
       en: "Made for Magnums and bottles that ask for space — without apology.",
       de: "Für Magnums und Flaschen, die Raum verlangen — ohne Entschuldigung.",
+      fr: "Conçu pour les magnums et les bouteilles qui ont besoin d’espace, sans s’en excuser.",
     },
     story: {
       it: "Ripiani più profondi, campata più larga. Il Magnium è il pezzo che ospita le etichette che in cantina restano in piedi da sole. Acciaio lucido, legno massello, proporzioni da grande formato.",
       en: "Deeper shelves, a wider span. Magnium is the piece that hosts the labels that stand on their own in the cellar. Polished steel, solid wood, large-format proportions.",
       de: "Tiefere Böden, weitere Spannweite. Magnium beherbergt die Etiketten, die im Keller für sich stehen.",
+      fr: "Des étagères plus profondes et une portée plus large. Magnium accueille les bouteilles qui se distinguent dans la cave : acier poli, bois massif et proportions grand format.",
     },
     specs: {
       it: [
@@ -243,6 +283,13 @@ export const products: Product[] = [
         "Proportionen für Magnum und Jeroboam",
         "Italienische Handfertigung",
       ],
+      fr: [
+        "Structure en tube inox poli",
+        "Étagères en bois massif naturel",
+        "Hauteur 1000 mm · Largeur 800 mm",
+        "Proportions pour magnums et jéroboams",
+        "Fabrication artisanale italienne",
+      ],
     },
   },
   {
@@ -253,21 +300,24 @@ export const products: Product[] = [
     width: 900,
     height: 750,
     depth: 600,
-    capacity: { it: "Piano di servizio", en: "Service surface", de: "Servicefläche" },
+    capacity: { it: "Piano di servizio", en: "Service surface", de: "Servicefläche", fr: "Plateau de service" },
     claim: {
       it: "Fissi o mobili, sempre presenti.",
       en: "Fixed or mobile, always present.",
       de: "Fest oder mobil, immer da.",
+      fr: "Fixe ou mobile, toujours à portée de main.",
     },
     intro: {
       it: "Stabilità e funzione. Un appoggio sicuro in ogni momento della degustazione.",
       en: "Stability and function. A sure surface at every moment of the tasting.",
       de: "Stabilität und Funktion. Ein sicherer Halt in jedem Moment der Verkostung.",
+      fr: "Stabilité et fonctionnalité. Un appui sûr à chaque instant de la dégustation.",
     },
     story: {
       it: "Il banchetto è il gesto del servizio: altezza 750 mm, piano 900 × 600, struttura inox e legno. Fisso in sala, oppure mobile per seguire la degustazione da un tavolo all’altro.",
       en: "The bench is the gesture of service: 750 mm high, a 900 × 600 top, steel and wood. Fixed in the room, or mobile to follow the tasting from table to table.",
       de: "Die Bank ist die Geste des Service: 750 mm hoch, Platte 900 × 600, Stahl und Holz. Fest im Raum oder mobil.",
+      fr: "Le comptoir incarne le service : 750 mm de haut, un plateau de 900 × 600, en inox et en bois. Fixe dans la salle ou mobile pour accompagner la dégustation de table en table.",
     },
     specs: {
       it: [
@@ -291,6 +341,13 @@ export const products: Product[] = [
         "Fest oder auf Rollen",
         "Italienische Handfertigung",
       ],
+      fr: [
+        "Structure en tube inox poli",
+        "Plateau en bois massif naturel",
+        "Hauteur 750 mm · Largeur 900 mm · Profondeur 600 mm",
+        "Version fixe ou sur roulettes",
+        "Fabrication artisanale italienne",
+      ],
     },
   },
   {
@@ -302,21 +359,24 @@ export const products: Product[] = [
     width: 600,
     height: 1500,
     depth: 300,
-    capacity: { it: "3 bottiglie in presentazione", en: "3 bottles on display", de: "3 Flaschen in Präsentation" },
+    capacity: { it: "3 bottiglie in presentazione", en: "3 bottles on display", de: "3 Flaschen in Präsentation", fr: "3 bouteilles en présentation" },
     claim: {
       it: "Geometria, luce, presenza.",
       en: "Geometry, light, presence.",
       de: "Geometrie, Licht, Präsenz.",
+      fr: "Géométrie, lumière, présence.",
     },
     intro: {
       it: "Tagli precisi, luce integrata. Il vino esposto come opera.",
       en: "Precise cuts, integrated light. Wine shown as a work of art.",
       de: "Präzise Schnitte, integriertes Licht. Wein als Kunstwerk.",
+      fr: "Des découpes précises, une lumière intégrée. Le vin exposé comme une œuvre d’art.",
     },
     story: {
       it: "Tre bottiglie, non di più. Il Cut Art è un pezzo di presentazione: geometrie nette, LED calda nel taglio, modulo componibile per chi vuole una sequenza, non un magazzino.",
       en: "Three bottles, no more. Cut Art is a presentation piece: sharp geometry, warm LED in the cut, modular for those who want a sequence, not a warehouse.",
       de: "Drei Flaschen, nicht mehr. Cut Art ist ein Präsentationsstück: klare Geometrie, warmes LED im Schnitt, modular.",
+      fr: "Trois bouteilles, pas une de plus. Cut Art est une pièce de présentation aux lignes nettes, éclairée par une LED chaude et modulable pour créer une composition plutôt qu’un entrepôt.",
     },
     specs: {
       it: [
@@ -340,6 +400,13 @@ export const products: Product[] = [
         "Geometrische Schnitte mit integriertem LED",
         "Massivholz und Edelstahl",
       ],
+      fr: [
+        "Module composable",
+        "Largeur 600 mm · Hauteur 1500 mm · Profondeur 300 mm",
+        "Capacité : 3 bouteilles en présentation",
+        "Découpes géométriques avec LED intégrée",
+        "Bois massif et inox",
+      ],
     },
   },
   {
@@ -350,21 +417,24 @@ export const products: Product[] = [
     width: 900,
     height: 2300,
     depth: 420,
-    capacity: { it: "Bottiglie, libri, oggetti", en: "Bottles, books, objects", de: "Flaschen, Bücher, Objekte" },
+    capacity: { it: "Bottiglie, libri, oggetti", en: "Bottles, books, objects", de: "Flaschen, Bücher, Objekte", fr: "Bouteilles, livres, objets" },
     claim: {
       it: "Design che non chiede permesso.",
       en: "Design that does not ask permission.",
       de: "Design, das nicht um Erlaubnis fragt.",
+      fr: "Un design qui ne demande pas la permission.",
     },
     intro: {
       it: "Scala, libreria, cantinetta. Un capriccio di design multifunzione.",
       en: "Stair, library, cellar. A multifunctional design caprice.",
       de: "Treppe, Bibliothek, Weinkeller. Eine multifunktionale Designlaune.",
+      fr: "Escalier, bibliothèque, cave. Une pièce de design multifonctionnelle et audacieuse.",
     },
     story: {
       it: "Alto 2300 mm, l’arco inox con curvatura superiore attraversa la stanza. Mensole in legno per bottiglie, libri, oggetti. Un pezzo che si comporta da architettura, non da mobile.",
       en: "At 2300 mm, the stainless arch with its upper curve crosses the room. Wood shelves for bottles, books, objects. A piece that behaves as architecture, not furniture.",
       de: "Mit 2300 mm durchquert der Edelstahlbogen den Raum. Holzregale für Flaschen, Bücher, Objekte. Ein Stück, das Architektur ist, nicht Möbel.",
+      fr: "Du haut de ses 2300 mm, l’arche en inox traverse la pièce. Ses étagères en bois accueillent bouteilles, livres et objets. Une pièce qui relève de l’architecture plus que du mobilier.",
     },
     specs: {
       it: [
@@ -388,6 +458,13 @@ export const products: Product[] = [
         "Mischnutzung: Wein, Bücher, Objekte",
         "Statement für Lofts und Showrooms",
       ],
+      fr: [
+        "Arche en inox à courbure supérieure",
+        "Étagères en bois naturel",
+        "Hauteur 2300 mm",
+        "Usages multiples : vin, livres, objets",
+        "Pièce forte pour lofts et showrooms",
+      ],
     },
   },
   {
@@ -400,21 +477,24 @@ export const products: Product[] = [
     height: 2400,
     depth: 380,
     customSize: true,
-    capacity: { it: "Esposizione, scorta, servizio", en: "Display, storage, service", de: "Präsentation, Lager, Service" },
+    capacity: { it: "Esposizione, scorta, servizio", en: "Display, storage, service", de: "Präsentation, Lager, Service", fr: "Présentation, rangement, service" },
     claim: {
       it: "Bar verticale, pronto a servire.",
       en: "A vertical bar, ready to serve.",
       de: "Vertikale Bar, bereit zum Servieren.",
+      fr: "Un bar vertical, prêt à servir.",
     },
     intro: {
       it: "Esposizione, conservazione, servizio. Tutto su una parete.",
       en: "Display, storage, service. All on one wall.",
       de: "Präsentation, Lagerung, Service. Alles an einer Wand.",
+      fr: "Présentation, rangement, service : tout sur un seul mur.",
     },
     story: {
       it: "Ripiani inclinati, barra portabicchieri, ante inferiori, tavolo estraibile inox e LED calda. Il Wall Bar è la parete che lavora: mostra, conserva, serve — senza invadere il pavimento.",
       en: "Inclined shelves, a glass rail, lower doors, a pull-out stainless table and warm LED. Wall Bar is the wall that works: it shows, stores, serves — without taking the floor.",
       de: "Geneigte Regale, Glashalter, untere Türen, ausziehbarer Edelstahltisch und warmes LED. Die Wand, die arbeitet.",
+      fr: "Étagères inclinées, porte-verres, rangements bas, tablette coulissante en inox et LED chaude. Wall Bar est un mur qui travaille : il expose, range et sert sans empiéter sur le sol.",
     },
     specs: {
       it: [
@@ -438,6 +518,13 @@ export const products: Product[] = [
         "Warmes LED und Massivholz",
         "Maße nach der Wand",
       ],
+      fr: [
+        "Étagères inclinées et barre porte-verres",
+        "Portes basses et rangements dissimulés",
+        "Tablette coulissante en inox",
+        "LED chaude et bois massif",
+        "Dimensions adaptées au mur",
+      ],
     },
   },
   {
@@ -449,21 +536,24 @@ export const products: Product[] = [
     height: 0,
     depth: 0,
     customSize: true,
-    capacity: { it: "Fino a 100+ bottiglie", en: "Up to 100+ bottles", de: "Bis zu 100+ Flaschen" },
+    capacity: { it: "Fino a 100+ bottiglie", en: "Up to 100+ bottles", de: "Bis zu 100+ Flaschen", fr: "Jusqu’à plus de 100 bouteilles" },
     claim: {
       it: "Progettati per valorizzare ogni bottiglia.",
       en: "Designed to honour every bottle.",
       de: "Entworfen, um jede Flasche zu ehren.",
+      fr: "Pensés pour mettre chaque bouteille en valeur.",
     },
     intro: {
       it: "LED calda, bottiglie in evidenza. Per chi degusta con gli occhi prima che col palato.",
       en: "Warm LED, bottles in evidence. For those who taste with the eyes before the palate.",
       de: "Warmes LED, Flaschen im Licht. Für alle, die zuerst mit den Augen verkosten.",
+      fr: "Une LED chaude, des bouteilles mises en lumière. Pour celles et ceux qui dégustent d’abord avec les yeux.",
     },
     story: {
       it: "Enoteche, wine bar, sale degustazione: progettiamo la parete intera. Ripiani inclinati illuminati, struttura inox e legno, capienza oltre le cento bottiglie. Ogni allestimento è un disegno, non un catalogo.",
       en: "Wine shops, bars, tasting rooms: we design the whole wall. Lit inclined shelves, steel and wood, capacity beyond a hundred bottles. Every installation is a drawing, not a catalogue line.",
       de: "Weinhandlungen, Bars, Verkostungsräume: wir entwerfen die ganze Wand. Beleuchtete geneigte Regale, Stahl und Holz, über hundert Flaschen.",
+      fr: "Cavistes, bars à vin, salles de dégustation : nous concevons le mur dans son ensemble. Étagères inclinées éclairées, inox et bois, capacité de plus de cent bouteilles. Chaque aménagement est un projet, pas une ligne de catalogue.",
     },
     specs: {
       it: [
@@ -487,6 +577,13 @@ export const products: Product[] = [
         "Ideal für Weinbars und Verkostungen",
         "Entwurf nach Aufmaß vor Ort",
       ],
+      fr: [
+        "Étagères inclinées avec LED chaude",
+        "Structure en inox et bois naturel",
+        "Jusqu’à plus de 100 bouteilles",
+        "Idéal pour les cavistes et les dégustations",
+        "Projet conçu après relevé des lieux",
+      ],
     },
   },
   {
@@ -499,21 +596,24 @@ export const products: Product[] = [
     height: 2200,
     depth: 80,
     customSize: true,
-    capacity: { it: "Soglia, non contenitore", en: "A threshold, not a container", de: "Eine Schwelle, kein Behälter" },
+    capacity: { it: "Soglia, non contenitore", en: "A threshold, not a container", de: "Eine Schwelle, kein Behälter", fr: "Un seuil, pas un contenant" },
     claim: {
       it: "L’ingresso al piacere.",
       en: "The entrance to pleasure.",
       de: "Der Eingang zum Genuss.",
+      fr: "L’entrée dans le plaisir.",
     },
     intro: {
       it: "Incisa, illuminata, indimenticabile. La soglia che promette emozione.",
       en: "Engraved, lit, unforgettable. The threshold that promises feeling.",
       de: "Graviert, beleuchtet, unvergesslich. Die Schwelle, die Gefühl verspricht.",
+      fr: "Gravé, éclairé, inoubliable. Le seuil qui annonce une émotion.",
     },
     story: {
       it: "Telaio inox, vetro fumé inciso, pannello inferiore in massello, LED opzionale nel profilo. Singola o doppia. La porta non chiude la cantina: la annuncia.",
       en: "Stainless frame, engraved smoked glass, a solid wood lower panel, optional LED in the profile. Single or double. The door does not close the cellar: it announces it.",
       de: "Edelstahlrahmen, graviertes Rauchglas, unteres Massivholzfeld, optionales LED im Profil. Ein- oder zweiflügelig. Die Tür schließt den Keller nicht — sie kündigt ihn an.",
+      fr: "Cadre en inox, verre fumé gravé, panneau inférieur en bois massif et LED optionnelle dans le profil. Simple ou double. La porte ne ferme pas la cave : elle l’annonce.",
     },
     specs: {
       it: [
@@ -537,6 +637,13 @@ export const products: Product[] = [
         "Ein- oder zweiflügelig",
         "Maßgenau für die vorhandene Öffnung",
       ],
+      fr: [
+        "Cadre en inox avec verre fumé gravé",
+        "Panneau inférieur en bois massif",
+        "LED optionnelle dans le cadre",
+        "Version à un ou deux vantaux",
+        "Dimensions adaptées à l’ouverture existante",
+      ],
     },
   },
 
@@ -549,22 +656,25 @@ export const products: Product[] = [
     height: 0,
     depth: 0,
     customSize: true,
-    capacity: { it: "Non applicabile", en: "Not applicable", de: "Nicht zutreffend" },
-    claim: { it: "Materia e funzione, in dialogo.", en: "Material and function in dialogue.", de: "Material und Funktion im Dialog." },
+    capacity: { it: "Non applicabile", en: "Not applicable", de: "Nicht zutreffend", fr: "Sans objet" },
+    claim: { it: "Materia e funzione, in dialogo.", en: "Material and function in dialogue.", de: "Material und Funktion im Dialog.", fr: "La matière et la fonction en dialogue." },
     intro: {
       it: "Complementi coordinati per l’universo Pooly's Mood.",
       en: "Coordinated pieces for the Pooly's Mood world.",
       de: "Passende Möbel für die Welt von Pooly's Mood.",
+      fr: "Des pièces assorties à l’univers de Pooly's Mood.",
     },
     story: {
       it: "Elementi modulari in inox e legno naturale. Sedute, tavolini e complementi si progettano in base allo spazio.",
       en: "Modular pieces in stainless steel and natural wood. Seating, low tables and accessories are designed for the space.",
       de: "Modulare Elemente aus Edelstahl und Naturholz. Sitzmöbel, niedrige Tische und Ergänzungen werden passend zum Raum entworfen.",
+      fr: "Des éléments modulaires en inox et en bois naturel. Assises, tables basses et accessoires sont conçus selon l’espace.",
     },
     specs: {
       it: ["Inox e legno naturale", "Elementi modulari", "Dimensioni configurabili", "Progetto su misura dello spazio"],
       en: ["Stainless steel and natural wood", "Modular elements", "Configurable dimensions", "Designed for the space"],
       de: ["Edelstahl und Naturholz", "Modulare Elemente", "Konfigurierbare Maße", "Passend zum Raum geplant"],
+      fr: ["Inox et bois naturel", "Éléments modulaires", "Dimensions configurables", "Projet adapté à l’espace"],
     },
   },
 ];
@@ -577,16 +687,19 @@ export const projects: Project[] = [
       it: "Espositore baule bruciato",
       en: "Charred trunk display",
       de: "Verkohlter Stamm-Display",
+      fr: "Présentoir coffre en bois brûlé",
     },
     place: {
       it: "Pezzo unico · Piemonte",
       en: "One-off · Piedmont",
       de: "Unikat · Piemont",
+      fr: "Pièce unique · Piémont",
     },
     desc: {
       it: "Un baule di legno bruciato a venatura carbonizzata, scavato per accogliere le bottiglie. La materia parla prima della forma.",
       en: "A charred wood trunk, grain turned to carbon, carved to hold bottles. Material speaks before form.",
       de: "Ein verkohlter Holzstamm, die Maserung zu Kohle geworden, ausgehöhlt für Flaschen. Die Materie spricht vor der Form.",
+      fr: "Un coffre en bois brûlé au veinage carbonisé, creusé pour accueillir les bouteilles. La matière parle avant la forme.",
     },
   },
   {
@@ -596,16 +709,19 @@ export const projects: Project[] = [
       it: "Portabottiglie tronco naturale",
       en: "Natural trunk bottle rack",
       de: "Flaschenhalter aus Naturstamm",
+      fr: "Porte-bouteilles en tronc naturel",
     },
     place: {
       it: "Pezzo unico · Piemonte",
       en: "One-off · Piedmont",
       de: "Unikat · Piemont",
+      fr: "Pièce unique · Piémont",
     },
     desc: {
       it: "Un tronco d’albero lasciato quasi intero. I fori nascono dal legno, non dal disegno. La cantina come presenze vegetali.",
       en: "A tree trunk left almost whole. The openings are born from the wood, not from the drawing. The cellar as a living presence.",
       de: "Ein Stamm, fast ganz gelassen. Die Öffnungen entstehen aus dem Holz, nicht aus der Zeichnung.",
+      fr: "Un tronc d’arbre presque intact. Les ouvertures naissent du bois, pas du dessin. La cave devient une présence végétale.",
     },
   },
 ];
@@ -623,6 +739,11 @@ export function relatedProducts(slug: string, n = 3) {
 }
 
 export function formatMm(n: number, lang: Lang) {
-  if (!n) return lang === "en" ? "Made to measure" : lang === "de" ? "Maßanfertigung" : "Su misura";
+  if (!n) {
+    if (lang === "en") return "Made to measure";
+    if (lang === "de") return "Maßanfertigung";
+    if (lang === "fr") return "Sur mesure";
+    return "Su misura";
+  }
   return `${n} mm`;
 }

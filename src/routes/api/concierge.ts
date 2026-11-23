@@ -7,7 +7,10 @@ function readTranscript(value: unknown) {
   if (!value || typeof value !== "object") return null;
   const record = value as { lang?: unknown; messages?: unknown };
   if (!Array.isArray(record.messages)) return null;
-  const lang = record.lang === "en" || record.lang === "de" ? record.lang : "it";
+  const lang =
+    record.lang === "en" || record.lang === "de" || record.lang === "fr"
+      ? record.lang
+      : "it";
   const messages: { role: "visitor" | "atelier"; text: string; at: string }[] = [];
   for (const item of record.messages.slice(0, MAX_MESSAGES)) {
     if (!item || typeof item !== "object") continue;

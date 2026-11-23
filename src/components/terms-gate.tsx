@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMood } from "@/lib/store";
-import type { Lang } from "@/lib/catalog";
+import { LANGUAGES, languageNames, type Lang } from "@/lib/catalog";
 import { ui } from "@/lib/i18n";
 
 export const TERMS_ACCEPTANCE_KEY = "pm-terms-acceptance";
@@ -8,6 +8,7 @@ export const TERMS_ACCEPTANCE_VERSION = "2026-11-14";
 
 const copy: Record<Lang, {
   title: string;
+  language: string;
   loading: string;
   checkbox: string;
   readTerms: string;
@@ -17,6 +18,7 @@ const copy: Record<Lang, {
 }> = {
   it: {
     title: "Prima di entrare",
+    language: "Lingua",
     loading: "Sto verificando l'accettazione…",
     checkbox: "Ho letto e accetto i",
     readTerms: "Termini e condizioni",
@@ -26,6 +28,7 @@ const copy: Record<Lang, {
   },
   en: {
     title: "Before you enter",
+    language: "Language",
     loading: "Checking your acceptance…",
     checkbox: "I have read and accept the",
     readTerms: "Terms and conditions",
@@ -35,12 +38,23 @@ const copy: Record<Lang, {
   },
   de: {
     title: "Bevor Sie eintreten",
+    language: "Sprache",
     loading: "Zustimmung wird geprüft…",
     checkbox: "Ich habe die",
     readTerms: "Nutzungsbedingungen gelesen und akzeptiere sie",
     decline: "Ablehnen",
     accept: "Akzeptieren und eintreten",
     declined: "Sie haben die Bedingungen abgelehnt. Für den Zugang müssen Sie sie akzeptieren; Sie können diesen Tab schließen.",
+  },
+  fr: {
+    title: "Avant d’entrer",
+    language: "Langue",
+    loading: "Vérification de votre consentement…",
+    checkbox: "J’ai lu et j’accepte les",
+    readTerms: "Conditions générales",
+    decline: "Refuser",
+    accept: "Accepter et entrer",
+    declined: "Vous avez refusé les conditions. Vous devez les accepter pour accéder au site ; vous pouvez fermer cet onglet.",
   },
 };
 
@@ -72,14 +86,14 @@ export function TermsGate({
         className="w-full max-w-md rounded-2xl border border-accent/50 bg-surface px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.65)] sm:px-8 sm:py-8"
       >
         <header className="text-center">
-          <div className="mb-4 flex justify-center gap-1" aria-label="Language">
-            {(["it", "en", "de"] as const).map((code) => (
+          <div className="mb-4 flex justify-center gap-1" aria-label={t.language}>
+            {LANGUAGES.map((code) => (
               <button
                 key={code}
                 type="button"
                 onClick={() => setLang(code)}
                 aria-pressed={lang === code}
-                aria-label={code === "it" ? "Italiano" : code === "en" ? "English" : "Deutsch"}
+                aria-label={languageNames[code]}
                 className={`min-h-9 min-w-10 rounded-full px-3 text-xs uppercase tracking-[0.14em] transition ${
                   lang === code
                     ? "border border-accent/60 bg-accent/10 text-accent"
@@ -132,7 +146,13 @@ export function TermsGate({
               <div id="terms-gate-full-terms" className="mt-3 max-h-48 space-y-3 overflow-y-auto rounded-xl border border-border bg-bg/50 p-4 text-xs leading-relaxed text-muted">
                 {site.termsBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 <a className="text-accent underline underline-offset-4 hover:text-fg" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
-                  {lang === "de" ? "Google-Datenschutzerklärung" : lang === "en" ? "Google Privacy Policy" : "Informativa privacy Google"}
+                  {lang === "de"
+                    ? "Google-Datenschutzerklärung"
+                    : lang === "en"
+                      ? "Google Privacy Policy"
+                      : lang === "fr"
+                        ? "Règles de confidentialité de Google"
+                        : "Informativa privacy Google"}
                 </a>
               </div>
             ) : null}

@@ -4,6 +4,7 @@ import { conciergeCopy, replyToVisitor, type Lang } from "@/lib/concierge";
 import { useMood } from "@/lib/store";
 
 const KEY = "pm-concierge-v1";
+const CONVERSATION_IDLE_TIMEOUT = 60_000;
 
 function AtelierRobot() {
   return (
@@ -68,6 +69,12 @@ function writeStored(messages: StoredMessage[]) {
   }
 }
 
+function getTranscriptVersion(messages: StoredMessage[]) {
+  const visitorMessages = messages.filter((message) => message.role === "visitor");
+  const lastMessage = visitorMessages.at(-1);
+  return `${visitorMessages.length}:${lastMessage?.at ?? ""}:${lastMessage?.text ?? ""}`;
+}
+
 export function Concierge() {
   const lang = useMood((s) => s.lang) as Lang;
   const t = conciergeCopy[lang] ?? conciergeCopy.it;
@@ -83,7 +90,9 @@ export function Concierge() {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesRef = useRef<StoredMessage[]>([]);
   const sendingRef = useRef(false);
+  const lastAttemptedTranscriptRef = useRef("");
   const pageHideSentRef = useRef(false);
+  const sendConversationRef = useRef<() => void>(() => {});
   const requestCloseRef = useRef<() => void>(() => {});
   const interactedRef = useRef(false);
 
@@ -234,6 +243,7 @@ export function Concierge() {
   async function sendConversation() {
     const transcript = messagesRef.current;
     if (sendingRef.current || !transcript.some((message) => message.role === "visitor")) return;
+    lastAttemptedTranscriptRef.current = getTranscriptVersion(transcript);
     sendingRef.current = true;
     setSendingConversation(true);
     setConversationStatus(t.sending);
@@ -248,6 +258,7 @@ export function Concierge() {
       if (!response.ok || !result.ok) throw new Error("concierge-delivery-failed");
       writeStored([]);
       messagesRef.current = [];
+      lastAttemptedTranscriptRef.current = "";
       setMessages([]);
       setConversationStatus("");
     } catch {
@@ -257,6 +268,28 @@ export function Concierge() {
       setSendingConversation(false);
     }
   }
+
+  sendConversationRef.current = () => {
+    void sendConversation();
+  };
+
+  useEffect(() => {
+    const transcript = messagesRef.current;
+    if (
+      !open ||
+      !ready ||
+      sendingConversation ||
+      !transcript.some((message) => message.role === "visitor")
+    ) return;
+
+    const version = getTranscriptVersion(transcript);
+    if (lastAttemptedTranscriptRef.current === version) return;
+
+    const timeout = window.setTimeout(() => {
+      sendConversationRef.current();
+    }, CONVERSATION_IDLE_TIMEOUT);
+    return () => window.clearTimeout(timeout);
+  }, [open, ready, messages, draft, sendingConversation]);
 
   function requestClose() {
     setOpen(false);
@@ -344,6 +377,7 @@ export function Concierge() {
                 ) : null}
               </div>
             ) : null}
+            <p className="px-4 pt-2 text-[0.65rem] text-muted">{t.idleSendNotice}</p>
             <form
               className="flex shrink-0 items-center gap-2 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-2 md:pb-3"
               onSubmit={(event) => {

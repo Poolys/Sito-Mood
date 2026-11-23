@@ -62,7 +62,7 @@ export const ui = {
     atelierKicker: "Chi siamo",
     atelierTitle: "Un atelier in Piemonte.",
     atelierLead:
-      "Pooly's Mood nasce dal gesto di Paul Șerbănescu: accogliere il vino come si accoglie un ospite. Non esponiamo oggetti. Accogliamo presenze.",
+      "Pooly's Mood nasce dal gesto di Șerbănescu Paul Daniel: accogliere il vino come si accoglie un ospite. Non esponiamo oggetti. Accogliamo presenze.",
     atelierP1:
       "Progettiamo e realizziamo espositori e arredi per cantine private, enoteche, wine bar e showroom. Legni pregiati del Piemonte, inox italiano, luce calda. Ogni pezzo è disegnato, tagliato e montato a mano.",
     atelierP2:
@@ -111,7 +111,7 @@ export const ui = {
     formSelect: "Seleziona",
     terms: "Termini e condizioni",
     privacy: "La richiesta viene inviata via email all’atelier tramite il nostro servizio di moduli. Nel browser salviamo solo modello e configurazione, senza nome, email o messaggio.",
-    footerDesigned: "Progettato e realizzato da Paul Șerbănescu — Piemonte, Italia",
+    footerDesigned: "Progettato e realizzato da Șerbănescu Paul Daniel — Piemonte, Italia",
     footerMaterials: "Materiali: legni pregiati e inox specchio / satinato / nero",
     footerLicense: "Per licensing, prototipi o produzione: scrivici.",
     footerCopy: "© 2026 Pooly's Mood — Gaudium Vino",
@@ -239,7 +239,7 @@ export const ui = {
     atelierKicker: "Who we are",
     atelierTitle: "An atelier in Piedmont.",
     atelierLead:
-      "Pooly's Mood is the gesture of Paul Șerbănescu: to welcome wine as one welcomes a guest. We do not display objects. We welcome presences.",
+      "Pooly's Mood is the gesture of Șerbănescu Paul Daniel: to welcome wine as one welcomes a guest. We do not display objects. We welcome presences.",
     atelierP1:
       "We design and make displays and furnishings for private cellars, wine shops, bars and showrooms. Precious Piedmont woods, Italian stainless steel, warm light. Every piece is drawn, cut and assembled by hand.",
     atelierP2:
@@ -288,7 +288,7 @@ export const ui = {
     formSelect: "Select",
     terms: "Terms and conditions",
     privacy: "Your request is emailed to the atelier through our form provider. This browser stores only the model and configuration, not your name, email or message.",
-    footerDesigned: "Designed and made by Paul Șerbănescu — Piedmont, Italy",
+    footerDesigned: "Designed and made by Șerbănescu Paul Daniel — Piedmont, Italy",
     footerMaterials: "Materials: precious woods and mirror / brushed / black stainless steel",
     footerLicense: "For licensing, prototypes or production: write to us.",
     footerCopy: "© 2026 Pooly's Mood — Gaudium Vino",
@@ -416,7 +416,7 @@ export const ui = {
     atelierKicker: "Qui sommes-nous",
     atelierTitle: "Un atelier dans le Piémont.",
     atelierLead:
-      "Pooly's Mood est le geste de Paul Șerbănescu : accueillir le vin comme on accueille un invité. Nous n’exposons pas des objets. Nous accueillons des présences.",
+      "Pooly's Mood est le geste de Șerbănescu Paul Daniel : accueillir le vin comme on accueille un invité. Nous n’exposons pas des objets. Nous accueillons des présences.",
     atelierP1:
       "Nous concevons et fabriquons des présentoirs et du mobilier pour les caves privées, les cavistes, les bars à vin et les showrooms. Bois précieux du Piémont, inox italien, lumière chaleureuse. Chaque pièce est dessinée, découpée et assemblée à la main.",
     atelierP2:
@@ -466,7 +466,7 @@ export const ui = {
     terms: "Conditions générales",
     privacy:
       "Votre demande est envoyée par e-mail à l’atelier via notre service de formulaires. Ce navigateur ne conserve que le modèle et sa configuration, pas votre nom, votre e-mail ni votre message.",
-    footerDesigned: "Conçu et réalisé par Paul Șerbănescu — Piémont, Italie",
+    footerDesigned: "Conçu et réalisé par Șerbănescu Paul Daniel — Piémont, Italie",
     footerMaterials: "Matériaux : bois précieux et inox miroir / brossé / noir",
     footerLicense: "Pour les licences, prototypes ou productions : écrivez-nous.",
     footerCopy: "© 2026 Pooly's Mood — Gaudium Vino",
@@ -594,7 +594,7 @@ export const ui = {
     atelierKicker: "Wer wir sind",
     atelierTitle: "Ein Atelier im Piemont.",
     atelierLead:
-      "Pooly's Mood ist die Geste von Paul Șerbănescu: Wein empfangen, wie man einen Gast empfängt. Wir stellen keine Objekte aus. Wir empfangen Gegenwarten.",
+      "Pooly's Mood ist die Geste von Șerbănescu Paul Daniel: Wein empfangen, wie man einen Gast empfängt. Wir stellen keine Objekte aus. Wir empfangen Gegenwarten.",
     atelierP1:
       "Wir entwerfen und fertigen Displays und Möbel für private Keller, Weinhandlungen, Bars und Showrooms. Edle Hölzer aus dem Piemont, italienischer Edelstahl, warmes Licht. Jedes Stück wird gezeichnet, geschnitten und von Hand montiert.",
     atelierP2:
@@ -643,7 +643,7 @@ export const ui = {
     formSelect: "Wählen",
     terms: "Nutzungsbedingungen",
     privacy: "Ihre Anfrage wird über unseren Formulardienst per E-Mail an das Atelier gesendet. Dieser Browser speichert nur Modell und Konfiguration, nicht Name, E-Mail oder Nachricht.",
-    footerDesigned: "Entworfen und gefertigt von Paul Șerbănescu — Piemont, Italien",
+    footerDesigned: "Entworfen und gefertigt von Șerbănescu Paul Daniel — Piemont, Italien",
     footerMaterials: "Materialien: edle Hölzer und Spiegel- / gebürsteter / schwarzer Edelstahl",
     footerLicense: "Für Licensing, Prototypen oder Produktion: schreiben Sie uns.",
     footerCopy: "© 2026 Pooly's Mood — Gaudium Vino",

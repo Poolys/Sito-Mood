@@ -377,7 +377,6 @@ export function Concierge() {
                 ) : null}
               </div>
             ) : null}
-            <p className="px-4 pt-2 text-[0.65rem] text-muted">{t.idleSendNotice}</p>
             <form
               className="flex shrink-0 items-center gap-2 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-2 md:pb-3"
               onSubmit={(event) => {
@@ -408,7 +407,7 @@ export function Concierge() {
             </form>
           </section>
         ) : null}
-        {!open && conversationStatus ? (
+        {!open && conversationStatus === t.conversationFailed ? (
           <div className="flex max-w-[min(22.5rem,calc(100vw-2rem))] items-center gap-3 rounded-xl border border-accent/50 bg-surface px-4 py-3 text-sm text-fg shadow-[0_8px_24px_rgba(0,0,0,0.35)]" role="status" aria-live="polite">
             <span className="flex-1">{conversationStatus}</span>
             {conversationStatus === t.conversationFailed ? (

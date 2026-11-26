@@ -159,7 +159,7 @@ function focusOf(q: string): Focus {
   if (/(larghezz|\blargo\b|width|breit|largeur)/.test(q)) return "larghezza";
   if (/(profond|depth|spessore di|tief|profondeur)/.test(q)) return "profondita";
   if (/(capienz|bottigl|quante|capacity|flaschen|how many|capacite|bouteilles|combien)/.test(q)) return "capienza";
-  if (/(material|scheda|dettagli|legno|inox|acciaio|led|vetro|wood|steel|holz|bois|verre)/.test(q)) return "materiali";
+  if (/(material|scheda|dettagli|legno|inox|acciaio|led|vetro|wood|steel|holz|bois|verre|tubolar|tubo|tubi|ripian|spessor|square tube|hollow section|shelf|shelves|thickness|vierkantrohr|rohr|fachbod|einlegebod|starke|tube|etagere|epaisseur|internal|inside|clearance|compartment|space|glass holder|glas|innenraum|innen|abstand|espace|interieur|niche|intern|spazio|luce|portabicchieri|hauteur libre)/.test(q)) return "materiali";
   if (/(misur|dimension|formato|size|masse|grosse|mesure|taille)/.test(q)) return "misure";
   return "tutto";
 }

@@ -96,7 +96,8 @@
       "nome": "Wall Bar",
       "tipo": "bar a parete",
       "descrizione_breve": "Esposizione e servizio in un unico gesto.",
-      "struttura": "modulo a parete con ripiani inclinati e barra",
+      "struttura": "modulo a parete con tubolare quadro 40 × 40 × 2 mm, ripiani inclinati e barra",
+      "misure": "Ingombro esterno: larghezza 1250 mm, altezza 2000 mm, profondità principale 300 mm. Quote verticali dall’alto: primo ripiano 400 mm, secondo ripiano 400 mm, zona portabicchieri 600 mm, armadietto inferiore 400 mm. Somma delle quote verticali indicate: 1800 mm; i 200 mm mancanti all’altezza totale di 2000 mm corrispondono a cinque larghezze da 40 mm dei tubolari.",
       "caratteristiche": [
         "portabicchieri",
         "ripiani illuminati",
